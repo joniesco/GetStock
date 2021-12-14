@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "370701145385",
+    "project_id": "getstock-33cbf",
+    "storage_bucket": "getstock-33cbf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370701145385:android:32d869b1d0a02780f2d338",
+        "android_client_info": {
+          "package_name": "com.example.getstock"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "370701145385-fsrll2m3ia81slq9un66sdlddh7ok83g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9ZTRhAsNNN3t_SsIA6R9Wut1oGAg7WcI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "370701145385-fsrll2m3ia81slq9un66sdlddh7ok83g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
