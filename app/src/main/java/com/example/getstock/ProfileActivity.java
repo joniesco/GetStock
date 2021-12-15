@@ -1,6 +1,5 @@
 package com.example.getstock;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,82 +16,42 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-
-import yahoofinance.YahooFinance;
-
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
     //Will queue our requests.
-    private EditText stockSymbol;
-    private Button search;
-    private ProgressBar progressBar;
+    private RequestQueue queue;
+    private EditText SearchBox;
+    private TextView SearchBtn;
 
-    private FirebaseUser user;
-    private DatabaseReference reference;
-    private String userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        search = (Button) findViewById(R.id.SearchBtn);
-        search.setOnClickListener(this);
+        // initializing the queue object
+        queue = Volley.newRequestQueue(this);
 
-        stockSymbol = (EditText) findViewById(R.id.txtSearch2);
+        //Set search button
+        SearchBtn = (Button) findViewById(R.id.SearchBtn);
+        SearchBtn.setOnClickListener(this);
 
-        //welcome user
-        user= FirebaseAuth.getInstance().getCurrentUser();
-        reference= FirebaseDatabase.getInstance().getReference("Users");
-        userID=user.getUid();
-        final TextView UserNameTextView = (TextView) findViewById(R.id.UserName);
-        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User userProfile =snapshot.getValue((User.class));
-                if(userProfile!= null){
-                    String fullName =userProfile.fullName;
-                    UserNameTextView.setText("Welcome " + fullName + "!!!");
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            Toast.makeText(ProfileActivity.this,"something wrpng happend!",Toast.LENGTH_LONG).show();
-            }
-        });
-        // end welcome user
+        //Set search box
+        SearchBox = (EditText) findViewById(R.id.txtSearch2);
+        SearchBox.setText("");
     }
 
     @Override
     public void onClick(View view) {
-        try {
-            fetchStock();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+        //Will hold our string request.
+        StringRequest stringRequest = searchNameStringRequest(SearchBox.getText().toString());
+//        stringRequest.setTag(TAG_SEARCH_NAME);
 
-    private void fetchStock() throws IOException {
-
-        setContentView(R.layout.activity_search_result);
-//        progressBar.setVisibility(View.VISIBLE);
-
-        String symbol = stockSymbol.getText().toString().trim();
-        final TextView answer = (TextView) findViewById(R.id.answer);
-        answer.setText(YahooFinance.get(symbol).toString());
+        // executing the request (adding to queue)
+        queue.add(stringRequest);
     }
 
     /**
