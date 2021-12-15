@@ -43,6 +43,14 @@ public class SearchResult extends AppCompatActivity {
         //answer = (TextView) findViewById(R.id.answer);
         //answer.setText(ans);
     }
+
+    /**
+     * Get our API string result and transform it to an Array of strings.
+     *
+     * @param result
+     * @return
+     * @throws JSONException
+     */
     private String[] getSearchResults(String result) throws JSONException {
         JSONArray jsonArray = new JSONArray(result);
         String [] answer = new String[jsonArray.length()];
