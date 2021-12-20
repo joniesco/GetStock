@@ -157,6 +157,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     public void onErrorResponse(VolleyError error) {
                         // display a simple message on the screen
                         Toast.makeText(ProfileActivity.this, "Food source is not responding (USDA API)", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ProfileActivity.this, "Food source is not responding (USDA API)", Toast.LENGTH_LONG).show();
                     }
                 });
     }
