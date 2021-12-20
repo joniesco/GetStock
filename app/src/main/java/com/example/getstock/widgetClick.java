@@ -9,18 +9,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class widgetClick extends AppCompatActivity {
+public class widgetClick extends AppCompatActivity implements VolleyCallback {
     TextView textView;
-    String answer;
+    String answer="asd";
     StringRequest stringRequest;
+    private RequestQueue queue;
+
 
     //Create all our fields
     TextView exchange;
@@ -38,10 +43,11 @@ public class widgetClick extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_widget_click);
+        queue = Volley.newRequestQueue(this);
         Bundle b = getIntent().getExtras();
-        String ans = b.getString("Code");
+        String Symbol = b.getString("Code");
 
-        updateAPIdata(ans);
+//        JsonObjectRequest str =  updateAPIdata(Symbol);
 
         //Create all textViews.
         exchange = (TextView)findViewById(R.id.exchange);
@@ -55,14 +61,39 @@ public class widgetClick extends AppCompatActivity {
         market = (TextView)findViewById(R.id.market_cap);
         volume = (TextView)findViewById(R.id.volume);
         //
-        JSONObject jsonObject=new JSONObject();
+
         try {
-            jsonObject = new JSONObject(ans);
+            JSONObject jsonObject =new JSONObject(Symbol);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+//        try {
+//            jsonObject = new JSONObject(answer);
+//
+//            Toast.makeText(widgetClick.this, "TEST SUC 1", Toast.LENGTH_LONG).show();
+//        } catch (JSONException e) {
+//            Toast.makeText(widgetClick.this, "FAILURE 1", Toast.LENGTH_LONG).show();
+//        }
+
+        textView = (TextView) findViewById(R.id.textData);
+        textView.setText(Symbol);
+        JsonObjectRequest jor = updateAPIdata("test",this);
+        queue.add(jor);
+//        String code = "code";
+//        try {
+//            exchange.setText( jsonObject.getString(code));
+//            Toast.makeText(widgetClick.this, "TEST SUC 2 ", Toast.LENGTH_LONG).show();
+//        } catch (JSONException e) {
+//            Toast.makeText(widgetClick.this, "FAILURE 2 ", Toast.LENGTH_LONG).show();
+//        }
+
+    }
+
+    @Override
+    public void onSuccess(String result) {
         try {
-            exchange.setText((String)jsonObject.getString("code"));
+            JSONObject jsonObject =new JSONObject(result);
+            exchange.setText( jsonObject.getString("code"));
             stockprice.setText((String)jsonObject.getString("close"));
             pricechange.setText((String)jsonObject.getString("change"));
             percent.setText((String)jsonObject.getString("change_p"));
@@ -73,30 +104,38 @@ public class widgetClick extends AppCompatActivity {
             market.setText("Nasdaq");
             volume.setText((String)jsonObject.getString("volume"));
 
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        textView = (TextView) findViewById(R.id.textData);
-        textView.setText(ans);
-
     }
-    private StringRequest updateAPIdata(String stockSymbol) {
-        //Create url
+
+    @Override
+    public void onError(String result) {
+        Toast.makeText(widgetClick.this, "failure", Toast.LENGTH_LONG).show();
+    }
+
+    private JsonObjectRequest updateAPIdata(String symbol, final VolleyCallback callback) {
         String my_url = "https://eodhistoricaldata.com/api/real-time/AAPL.US?api_token=OeAFFmMliFG5orCUuwAKQ8l4WWFQ67YX&fmt=json";
 
-        return new StringRequest(Request.Method.GET, my_url,
-                new Response.Listener<String>() {
+        return new JsonObjectRequest(Request.Method.GET, my_url, null,
+                new Response.Listener<org.json.JSONObject>() {
+
                     @Override
-                    public void onResponse(String response) {
-                        answer = response;
+                    public void onResponse(JSONObject response) {
+                        callback.onSuccess(response.toString());
                     } // public void onResponse(String response)
                 },
+
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // display a simple message on the screen
+
                     }
                 });
     }
+
+    
+
+        
 }

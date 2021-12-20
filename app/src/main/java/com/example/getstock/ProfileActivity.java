@@ -61,17 +61,17 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-            User userProfile =snapshot.getValue(User.class);
-            if(userProfile!=null){
-                String fullName = userProfile.fullName;
-                greeting.setText("Welcome "+ fullName + "!");
+                User userProfile =snapshot.getValue(User.class);
+                if(userProfile!=null){
+                    String fullName = userProfile.fullName;
+                    greeting.setText("Welcome "+ fullName + "!");
 
-            }
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-        Toast.makeText(ProfileActivity.this,"something wrong happend", Toast.LENGTH_LONG).show();
+                Toast.makeText(ProfileActivity.this,"something wrong happend", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -105,7 +105,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         final String URL_PREFIX = "https://api.nal.usda.gov/ndb/search/?format=json";
 
         String url = URL_PREFIX + API + NAME_SEARCH + nameSearch + DATA_SOURCE + FOOD_GROUP + SORT + MAX_ROWS + BEGINNING_ROW;
-        String test_url = "https://eodhistoricaldata.com/api/search/"+nameSearch+"?api_token=61b664d1a29e60.51382518";
+        String test_url = "https://eodhistoricaldata.com/api/search/"+nameSearch+"?api_token=61c0b215e1fe21.31645304";
         // 1st param => type of method (GET/PUT/POST/PATCH/etc)
         // 2nd param => complete url of the API
         // 3rd param => Response.Listener -> Success procedure
