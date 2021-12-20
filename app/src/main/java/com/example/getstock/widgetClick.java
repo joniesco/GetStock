@@ -40,6 +40,7 @@ public class widgetClick extends AppCompatActivity {
         setContentView(R.layout.activity_widget_click);
         Bundle b = getIntent().getExtras();
         String ans = b.getString("Code");
+
         updateAPIdata(ans);
 
         //Create all textViews.
@@ -60,14 +61,29 @@ public class widgetClick extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        exchange.setText((String)jsonObject.get("code"));
+        try {
+            exchange.setText((String)jsonObject.getString("code"));
+            stockprice.setText((String)jsonObject.getString("close"));
+            pricechange.setText((String)jsonObject.getString("change"));
+            percent.setText((String)jsonObject.getString("change_p"));
+            openprice.setText((String)jsonObject.getString("open"));
+            prevprice.setText((String)jsonObject.getString("previousClose"));
+            high.setText((String)jsonObject.getString("high"));
+            low.setText((String)jsonObject.getString("low"));
+            market.setText("Nasdaq");
+            volume.setText((String)jsonObject.getString("volume"));
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         textView = (TextView) findViewById(R.id.textData);
         textView.setText(ans);
 
     }
     private StringRequest updateAPIdata(String stockSymbol) {
         //Create url
-        String my_url = "https://eodhistoricaldata.com/api/real-time/"+stockSymbol+"?api_token=OeAFFmMliFG5orCUuwAKQ8l4WWFQ67YX&fmt=json";
+        String my_url = "https://eodhistoricaldata.com/api/real-time/AAPL.US?api_token=OeAFFmMliFG5orCUuwAKQ8l4WWFQ67YX&fmt=json";
 
         return new StringRequest(Request.Method.GET, my_url,
                 new Response.Listener<String>() {
