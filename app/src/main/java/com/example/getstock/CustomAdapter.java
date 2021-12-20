@@ -19,6 +19,9 @@ import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONObject;
 
+/**
+ * This class implements an adapter to use inside the recycler view.
+ */
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
 
     private String[] localDataSet;
@@ -73,6 +76,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         // contents of the view with that element
         viewHolder.getTextView().setText(localDataSet[position]);
         viewHolder.clt.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Define an what happens when you click a widget.
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ct, widgetClick.class);

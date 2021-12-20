@@ -20,9 +20,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * This class defines what information each widget contains.
+ * We have implemented callback function inside it to receive the data from the API
+ * call , and display it.
+ */
 public class widgetClick extends AppCompatActivity implements VolleyCallback {
     TextView textView;
-    String answer="asd";
+    String answer="null";
     StringRequest stringRequest;
     private RequestQueue queue;
 
@@ -67,25 +72,11 @@ public class widgetClick extends AppCompatActivity implements VolleyCallback {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-//        try {
-//            jsonObject = new JSONObject(answer);
-//
-//            Toast.makeText(widgetClick.this, "TEST SUC 1", Toast.LENGTH_LONG).show();
-//        } catch (JSONException e) {
-//            Toast.makeText(widgetClick.this, "FAILURE 1", Toast.LENGTH_LONG).show();
-//        }
 
         textView = (TextView) findViewById(R.id.textData);
         textView.setText(Symbol);
-        JsonObjectRequest jor = updateAPIdata("test",this);
+        JsonObjectRequest jor = updateAPIdata(Symbol,this);
         queue.add(jor);
-//        String code = "code";
-//        try {
-//            exchange.setText( jsonObject.getString(code));
-//            Toast.makeText(widgetClick.this, "TEST SUC 2 ", Toast.LENGTH_LONG).show();
-//        } catch (JSONException e) {
-//            Toast.makeText(widgetClick.this, "FAILURE 2 ", Toast.LENGTH_LONG).show();
-//        }
 
     }
 
@@ -114,6 +105,13 @@ public class widgetClick extends AppCompatActivity implements VolleyCallback {
         Toast.makeText(widgetClick.this, "failure", Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * Will send an API request to receive all data regarding the stock symbol.
+     * if the API call is successful the OnSuccess method will be called.
+     * @param symbol
+     * @param callback
+     * @return
+     */
     private JsonObjectRequest updateAPIdata(String symbol, final VolleyCallback callback) {
         String my_url = "https://eodhistoricaldata.com/api/real-time/AAPL.US?api_token=OeAFFmMliFG5orCUuwAKQ8l4WWFQ67YX&fmt=json";
 
