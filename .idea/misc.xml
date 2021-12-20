@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/activity_main.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/activity_profile.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/activity_search_result.xml" value="0.4" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/activity_widget_click.xml" value="0.264" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/my_row.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/danda/Documents/Final_project/GetStock/app/src/main/res/drawable/ic_message.xml" value="0.1125" />
         <entry key="..\:/Users/danda/Documents/Final_project/GetStock/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/danda/Documents/Final_project/GetStock/app/src/main/res/layout/activity_profile.xml" value="0.25" />
@@ -11,7 +16,7 @@
         <entry key="..\:/Users/danda/Documents/Final_project/GetStock/app/src/main/res/layout/fragment_first.xml" value="0.25" />
         <entry key="..\:/Users/danda/Documents/Final_project/GetStock/app/src/main/res/menu/drawer_menu.xml" value="0.1" />
         <entry key="..\:/Users/jonie/Desktop/GetStock/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/jonie/Desktop/GetStock/app/src/main/res/layout/activity_profile.xml" value="0.264" />
+        <entry key="..\:/Users/jonie/Desktop/GetStock/app/src/main/res/layout/activity_profile.xml" value="0.6" />
         <entry key="..\:/Users/jonie/Desktop/GetStock/app/src/main/res/layout/activity_register.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/jonie/Desktop/GetStock/app/src/main/res/layout/activity_search_result.xml" value="0.264" />
         <entry key="..\:/Users/jonie/Desktop/GetStock/app/src/main/res/layout/activity_widget_click.xml" value="0.25416666666666665" />
