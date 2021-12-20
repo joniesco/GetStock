@@ -26,6 +26,19 @@ then they will be brought to a screen containing all the necessary details.
 <img src="https://i.ibb.co/42jxQzZ/051b652f-5658-453a-99c8-58a64d85b464.jpg" width="200" />
 
 # Project structure
-| ClassName | MainActivity  | ProfileActivity  |
+| ClassName | Description  | Extends/Implements  |
 | :---:   | :-: | :-: |
-| Explaination | contains the entrance screen | search screen |
+| Main activity | Entrance screen for login/register | extends AppCompatActivity implements View.OnClickListener |
+| Register | Class for register a user with name,age,mail and password | extends AppCompatActivity implements View.OnClickListener |
+| User | This Class represents a user (name,age and email) | -------- |
+| Profile activity | This Class represents a home page for user when he can search for a stock | extends AppCompatActivity implements View.OnClickListener |
+| CustomaAdapter| Making a list of stocks results to be dinamic | extends RecyclerView.Adapter<CustomAdapter.ViewHolder> |
+| SearchResult| A class to display the results of the user's search | extends AppCompatActivity |
+| widgetClick| A class to display some details on a spesific stock from the search results | extends AppCompatActivity implements VolleyCallback |
+
+
+
+
+
+
+
