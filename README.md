@@ -6,7 +6,7 @@ The project uses an external API to perform the search query and rest of the API
 
 # Usage
 New users must first register using the register screen and submit their details.
-![alt text](https://i.ibb.co/c1nnrQJ/7f2e5b06-73ff-433d-8f69-557469a9a295.jpg = 250x250)
+<img src="https://i.ibb.co/c1nnrQJ/7f2e5b06-73ff-433d-8f69-557469a9a295.jpg" width="200" />
 
 if a user is already registered they must enter their credentials.
 ![alt text](https://i.ibb.co/09qg7M2/72db9681-349f-4208-a5bc-ae00fd7b0480.jpg = 250x250)
