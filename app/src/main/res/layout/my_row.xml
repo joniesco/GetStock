@@ -7,6 +7,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/searchResultLayout"
     android:layout_margin="10dp"
+    android:background="@color/grey_900"
     >
 
     <androidx.cardview.widget.CardView
@@ -16,6 +17,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:cardBackgroundColor="@color/grey_900"
+        android:background="@color/grey_900"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout

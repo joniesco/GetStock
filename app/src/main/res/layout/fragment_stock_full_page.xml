@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StockFullPageFragment"
+    android:background="@color/grey_900">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/profile_picture"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="2dp"
+        android:src="@drawable/aapl"
+        />
+
+    <TextView
+        android:id="@+id/full_broker_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/profile_picture"
+        android:text="APL.US"
+        android:layout_marginLeft="50dp"
+        android:textColor="@color/teal_200"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/job_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_of_post"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@+id/profile_picture"
+        android:text="Apple Industries Inc."
+        android:textColor="@color/teal_700"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/actual_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_picture"
+        android:layout_toEndOf="@+id/profile_picture"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/teal_700"
+        android:text="Ex. WallStreet trader"
+        android:textSize="10sp" />
+    <ImageView
+        android:id="@+id/random_graph_picture"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_toEndOf="@+id/actual_post"
+        android:padding="2dp"
+        android:src="@drawable/random_chart1"
+        />
+    <include layout="@layout/activity_widget_click" />
+
+</FrameLayout>

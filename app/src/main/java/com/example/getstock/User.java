@@ -1,7 +1,12 @@
 package com.example.getstock;
 
-public class User {
+/**
+ * This class represents a general user.
+ */
+public class User implements GeneralUser{
     public String fullName,age,email;
+    public String [] UserFavorites;
+    public String initialMoney;
 
     public User(){
 
@@ -11,5 +16,25 @@ public class User {
         this.fullName = fullName;
         this.age = age;
         this.email = email;
+    }
+
+    @Override
+    public String getFullName() {
+        return null;
+    }
+
+    @Override
+    public String getEmail() {
+        return null;
+    }
+
+    @Override
+    public String getAge() {
+        return null;
+    }
+
+    @Override
+    public String getUserScore() {
+        return null;
     }
 }
