@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,8 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This is an adapter used in our recommendation screen
- * contains a list of User posts (Widgets).
+ * This is an adapter used in our broker screen
+ * contains a list of brokers (Widgets).
  */
 public class StockRecommendorAdapter extends RecyclerView.Adapter<StockRecommendorAdapter.StockRecommendorViewHolder> implements Filterable {
 
@@ -114,7 +115,12 @@ public class StockRecommendorAdapter extends RecyclerView.Adapter<StockRecommend
         holder.profilePicture.setImageResource(R.drawable.ic_accessibility);
         holder.profilePicture.setColorFilter(Color.parseColor("#519259"));
 
+        //Create our fragment to show broker
         Fragment showPost = new showPostFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("message", "From Activity"); //Attach the new fragment an instance of broker to show.
+        showPost.setArguments(bundle);
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             /**
              * Define an what happens when you click a widget.

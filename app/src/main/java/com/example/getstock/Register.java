@@ -25,6 +25,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     private EditText editTextFullName , editTextEmail, editTextPassword,editTextAge;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

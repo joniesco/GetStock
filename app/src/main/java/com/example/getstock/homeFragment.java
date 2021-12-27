@@ -16,28 +16,35 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Show a broker list to choose from.
+ * user can click on a broker to go into his profile.
  *
- * create an instance of this fragment.
+ *
  */
 public class homeFragment extends Fragment {
 
-    private RecyclerView recommendRecyclerView;
-    private List<UserPost> postList;
-    private FloatingActionButton floatingActionButton;
+    private RecyclerView recommendRecyclerView; //Will hold our widgets.
+    private List<UserPost> postList; //a random list that currently populates the page.
+    private List<Broker> brokerList; //The actual list that will populate the page.
+    private FloatingActionButton floatingActionButton; //floating + button.
     private CardView cardView;
-    Fragment homeFragment = this;
+    Fragment homeFragment = this; //Used adapter constructor.
+    private DatabaseReference brokerDatabase; //Will hold our database reference.
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
+
+        // Fill an fake list of items to be presented.
         fillExampleList();
 
         // Inflate the layout for this fragment
@@ -45,18 +52,8 @@ public class homeFragment extends Fragment {
         recommendRecyclerView.setHasFixedSize(true);
         recommendRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recommendRecyclerView.setAdapter(new StockRecommendorAdapter(postList,view.getContext(),this));
-//        cardView = (CardView) view.findViewById(R.id.click_post);
-//
-//        cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                FragmentManager fm = getActivity().getSupportFragmentManager();
-//                FragmentTransaction transaction = fm.beginTransaction();
-//                transaction.replace(R.id.fragment_container, new showPostFragment());
-//                transaction.commit();
-//            }
-//        });
 
+        //Set up the floating button.
         floatingActionButton = view.findViewById(R.id.addPost);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +70,7 @@ public class homeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-        ((AppCompatActivity) getActivity()).setTitle("User Recommendation");
+        ((AppCompatActivity) getActivity()).setTitle("Our Brokers");
     }
 
     private void fillExampleList() {
@@ -87,5 +84,14 @@ public class homeFragment extends Fragment {
         postList.add(new UserPost("test", "Seven", "Sixteen"));
         postList.add(new UserPost("test", "Eight", "Seventeen"));
         postList.add(new UserPost("test", "Nine", "Eighteen"));
+    }
+
+    /**
+     * Get a full list of brokers from database.
+     */
+    private void getBrokerListFromFB(){
+        brokerList = new ArrayList<>();
+//        brokerDatabase = FirebaseDatabase.getInstance().getReference().child("Brokers");
+        //need to insert all brokers into list and pass the list in the adapter.
     }
 }

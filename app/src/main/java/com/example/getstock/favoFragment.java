@@ -18,7 +18,10 @@ import java.util.List;
 
 
 /**
- * This Fragment shows a users favorite picks.
+ * This Fragment shows a users or brokers favorite picks.
+ * both user and broker can click a widget, and see full details
+ * of the stock.
+ *
  */
 public class favoFragment extends Fragment {
 
@@ -48,6 +51,12 @@ public class favoFragment extends Fragment {
         ((AppCompatActivity) getActivity()).setTitle("Favorites");
 
     }
+
+    /**
+     * a fake list of stocks,
+     * need to be populated from DB of the user/broker
+     *
+     */
         private void fillExampleList() {
             stockList = new ArrayList<>();
             stockList.add(new Stock("AAA", "One", "Ten"));
@@ -60,4 +69,11 @@ public class favoFragment extends Fragment {
             stockList.add(new Stock("APA", "Eight", "Seventeen"));
             stockList.add(new Stock("APA", "Nine", "Eighteen"));
         }
+
+    /**
+     * Create a list of preferences from the DB.
+     */
+    private void createFavoritesList(){
+
+    }
 }
