@@ -11,7 +11,7 @@ import android.widget.TextView;
  * A simple {@link Fragment} subclass.
  * Use the {@link showPostFragment#newInstance} factory method to
  * create an instance of this fragment.
- *
+ * Will be used to show profile of broker.
  */
 public class showPostFragment extends Fragment {
 
