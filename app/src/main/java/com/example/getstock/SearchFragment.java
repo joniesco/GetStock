@@ -2,7 +2,9 @@ package com.example.getstock;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,12 +22,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
+import org.w3c.dom.Text;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import eu.verdelhan.ta4j.Rule;
+import yahoofinance.Stock;
+import yahoofinance.YahooFinance;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,21 +47,52 @@ public class SearchFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private SearchView searchView = null;
     private SearchView.OnQueryTextListener queryTextListener;
-
-
+    private TextView textView;
+    final String[] s = {""};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        View view =  inflater.inflate(R.layout.fragment_search, container, false);
+        textView = view.findViewById(R.id.yahoo_stock);
+
+
+
+
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected void onPostExecute(Void unused) {
+                textView.setText(s[0]);
+            }
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                try {
+                    s[0] = YahooFinance.get("INTC").getSymbol();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+        }.execute();
+
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        ((AppCompatActivity) getActivity()).setTitle("Search");
+        ((AppCompatActivity) getActivity()).setTitle("Search stock symbol");
 
     }
 

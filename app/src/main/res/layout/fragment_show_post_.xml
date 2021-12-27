@@ -53,4 +53,14 @@
         android:textColor="@color/teal_700"
         android:text="Ex. WallStreet trader"
         android:textSize="10sp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add broker"
+        android:layout_below="@+id/actual_post"
+        android:layout_marginTop="100dp"
+        android:id="@+id/AddBroker"
+        android:textColor="@color/teal_700"
+        android:color="@color/grey_700"
+        android:layout_marginLeft="50dp"/>
 </FrameLayout>

@@ -1,15 +1,19 @@
 package com.example.getstock;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * This class represents a general user.
  */
 public class User implements GeneralUser{
     public String fullName,age,email;
-    public String [] UserFavorites;
-    public String initialMoney;
+    public String [] UserFavorites; //User preferences.
+    public String initialMoney; //The initial money the user starts with.
+    private Map<String, Double> brokerMap; //Will use to hold all our brokers, and amount invested.
 
     public User(){
-
+        brokerMap = new HashMap<>();
     }
 
     public User(String fullName, String age, String email) {

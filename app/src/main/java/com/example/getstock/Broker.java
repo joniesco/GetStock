@@ -10,9 +10,17 @@ import java.util.Map;
  */
 public class Broker implements GeneralUser{
     Map<String, Double> UsersInvesting; // a table containing User Id -> How much money did he give the broker.
+    Map<String, Integer> Portfolio; //Symbol - > amount of stocks.
+    double initialMoney;
+    final double buyingCommission = 0.05;
+    final double sellingCommission = 0.02;
+    private double brokerCommission;
 
-    public Broker(){
+    public Broker(double brokerCommission){
         UsersInvesting = new HashMap<>();
+        Portfolio = new HashMap<>();
+        initialMoney = 50000;
+        this.brokerCommission = brokerCommission;
     }
     @Override
     public String getFullName() {
@@ -35,26 +43,71 @@ public class Broker implements GeneralUser{
     }
 
     /**
-     * Get a users money back.
-     * @param email
-     * @return
-     */
-    public Double ReturnMoneyToUser(String email){
-        if(email!=null && UsersInvesting.get(email)!=null) {
-            return UsersInvesting.get(email);
-        }
-        else {
-            System.out.println("No such user in banking portfolio");
-            return 0.0;
-        }
-    }
-
-    /**
      * Add a new user to our portfolio, with given amount.
      */
     public void AddUser(String email, Double amount){
         if(email!=null && amount!=null && amount>0){
             UsersInvesting.put(email, amount);
         }
+        initialMoney += amount;
+    }
+
+    /**
+     * Buy a stock,  a simple way to buy a stock
+     * Don't forget stock buying,selling commission
+     * and the brokers commission.
+     * @param Symbol
+     * @param quantity
+     * @param stockPrice
+     */
+    public void BuyStock(String Symbol, int quantity, double stockPrice){
+        double buyStockWithCommission = stockPrice *quantity*buyingCommission;
+        if(buyStockWithCommission > initialMoney){
+            System.out.println("Insufficient funds");
+        }
+        else {
+
+            if (Portfolio.get(Symbol) == null) {
+                System.out.println("Added a new stock");
+                Portfolio.put(Symbol, quantity);
+            } else {
+                System.out.println("Add to existing stock");
+                Portfolio.put(Symbol, quantity);
+            }
+        }
+        initialMoney -= buyStockWithCommission;
+    }
+
+    /**
+     * Sell a stock
+     * @param Symbol
+     * @param quantity
+     * @param stockPrice
+     */
+    public void sellStock(String Symbol, int quantity, double stockPrice){
+        double sellStockWithCommission = stockPrice *quantity*sellingCommission;
+
+        if(Portfolio.get(Symbol)==null){
+            System.out.println("No such stock exists");
+        }
+        if(Portfolio.get(Symbol) < quantity){
+            System.out.println("Not enough stocks to sell");
+        }
+
+        int initialQuantity = Portfolio.get(Symbol);
+        Portfolio.put(Symbol,initialQuantity  + quantity );
+        initialMoney += sellStockWithCommission;
+    }
+
+    /**
+     * Return a user their money + after commission.
+     * @return
+     */
+    public Double giveMoneyBackToUser(String email){
+        if(UsersInvesting.get(email) == null && email!=null){
+            System.out.println("No such user exist");
+        }
+        initialMoney -= UsersInvesting.get(email);
+        return UsersInvesting.get(email) * (1 - brokerCommission);
     }
 }

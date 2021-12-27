@@ -1,12 +1,17 @@
 package com.example.getstock;
 
+import java.util.Date;
 import java.util.Random;
 
+/**
+ * Represents a post made by the user.
+ */
 public class UserPost implements GeneralUser{
     private String fullName,age,email;
     private String desc;
     private String postTitle;
     private String userScore;
+    private long dateAdded;
 
     public UserPost(){
 
@@ -32,6 +37,8 @@ public class UserPost implements GeneralUser{
         this.email = email;
         this.postTitle = addRandomPosts();
         this.desc = "BLABLABL LBABL BALBL SLADSLADSALDASD";
+        Date date = new Date();
+        dateAdded = date.getTime();
     }
 
     public String getFullName() {

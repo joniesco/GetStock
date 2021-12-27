@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/search"
-        android:textColor="#7CD1B8"/>
+        android:textColor="#7CD1B8"
+        android:id="@+id/yahoo_stock"/>
 
 </FrameLayout>
