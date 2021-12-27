@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,11 +22,17 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+enum usersType {USER, BROKER};
+
 public class Register extends AppCompatActivity implements View.OnClickListener {
+    private RadioGroup radioGroup;
+    private RadioButton broker, user ;
     private TextView banner , registerUser;
     private EditText editTextFullName , editTextEmail, editTextPassword,editTextAge;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
+    private String usersType = "None";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +48,14 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         editTextEmail = (EditText) findViewById(R.id.Email);
         editTextPassword = (EditText) findViewById(R.id.password);
 
+        radioGroup = findViewById(R.id.user_type);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
+        broker = findViewById(R.id.broker);
+        broker.setOnClickListener(this);
 
+        user = findViewById(R.id.user);
+        user.setOnClickListener(this);
     }
 
     @Override
@@ -54,9 +67,17 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             case R.id.registerUser:
                 registerUser();
                 break;
+            case R.id.broker:
+                usersType = "broker";
+                break;
+            case R.id.user:
+                usersType = "user";
+                break;
         }
 
     }
+
+
 
     private void registerUser() {
         String email = editTextEmail.getText().toString().trim();
@@ -94,6 +115,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             editTextPassword.requestFocus();
             return;
         }
+        if(usersType.equals("None")){
+            Toast.makeText(Register.this,"Please select User Type",Toast.LENGTH_LONG)
+                    .show();
+            return;
+        }
         progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
@@ -101,16 +127,17 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 FirebaseDatabase.getInstance().getReference("Users")
                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                         .setValue(user).addOnCompleteListener(task1 -> {
-                           if(task1.isSuccessful()){
-                               Toast.makeText(Register.this,"User has been registered sucssesfully",Toast.LENGTH_LONG)
-                                       .show();
-                           }else{Toast.makeText(Register.this,"User has failed to register",Toast.LENGTH_LONG)
-                                   .show();
+                    if(task1.isSuccessful()){
+                        Toast.makeText(Register.this,"User has been registered sucssesfully",Toast.LENGTH_LONG)
+                                .show();
+                    }else{Toast.makeText(Register.this,"User has failed to register",Toast.LENGTH_LONG)
+                            .show();
 
-                           }
+                    }
                     progressBar.setVisibility(View.GONE);
                 });
-            }else{Toast.makeText(Register.this,"User has failed to register",Toast.LENGTH_LONG)
+            }
+            else{Toast.makeText(Register.this,"failed to register",Toast.LENGTH_LONG)
                     .show();
                 progressBar.setVisibility(View.GONE);
 
@@ -118,3 +145,20 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         });
     }
 }
+
+
+//            else if(task.isSuccessful() && usersType.equals("broker")){
+//                Broker broker =  new Broker(100);
+//                FirebaseDatabase.getInstance().getReference("Brokers")
+//                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+//                        .setValue(broker).addOnCompleteListener(task1 -> {
+//                           if(task1.isSuccessful()){
+//                               Toast.makeText(Register.this,"Broker has been registered sucssesfully",Toast.LENGTH_LONG)
+//                                       .show();
+//                           }else{Toast.makeText(Register.this,"Broker has failed to register",Toast.LENGTH_LONG)
+//                                   .show();
+//
+//                           }
+//                    progressBar.setVisibility(View.GONE);
+//                });
+//            }

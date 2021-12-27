@@ -7,6 +7,8 @@ import java.util.Map;
  * This class represents a general user.
  */
 public class User implements GeneralUser{
+
+    final String userType = "User";
     public String fullName,age,email;
     public String [] UserFavorites; //User preferences.
     public String initialMoney; //The initial money the user starts with.

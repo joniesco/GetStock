@@ -14,6 +14,7 @@ public class Broker implements GeneralUser{
     double initialMoney;
     final double buyingCommission = 0.05;
     final double sellingCommission = 0.02;
+    final String userType = "Broker";
     private double brokerCommission;
 
     public Broker(double brokerCommission){
