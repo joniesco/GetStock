@@ -11,16 +11,16 @@ import java.util.Map;
 public class Broker implements GeneralUser{
     Map<String, Double> UsersInvesting; // a table containing User Id -> How much money did he give the broker.
     Map<String, Integer> Portfolio; //Symbol - > amount of stocks.
-    double initialMoney;
-    final double buyingCommission = 0.05;
-    final double sellingCommission = 0.02;
+    Double initialMoney;
+    final Double buyingCommission = 0.05;
+    final Double sellingCommission = 0.02;
     final String userType = "Broker";
-    private double brokerCommission;
+    private Double brokerCommission;
 
-    public Broker(double brokerCommission){
+    public Broker(Double brokerCommission){
         UsersInvesting = new HashMap<>();
         Portfolio = new HashMap<>();
-        initialMoney = 50000;
+        initialMoney = 50000.0;
         this.brokerCommission = brokerCommission;
     }
     @Override

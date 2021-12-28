@@ -8,20 +8,25 @@ import java.util.Map;
  */
 public class User implements GeneralUser{
 
-    final String userType = "User";
+    public String userType;
     public String fullName,age,email;
-    public String [] UserFavorites; //User preferences.
-    public String initialMoney; //The initial money the user starts with.
-    private Map<String, Double> brokerMap; //Will use to hold all our brokers, and amount invested.
 
-    public User(){
-        brokerMap = new HashMap<>();
-    }
+//    public String [] UserFavorites = new String[10]; //User preferences.
 
-    public User(String fullName, String age, String email) {
+    public String initialMoney ; //The initial money the user starts with.
+    private HashMap<String, Double> brokerMap  ; //Will use to hold all our brokers, and amount invested.
+
+//    public User(){
+//        brokerMap = new HashMap<>();
+//    }
+
+    public User(String fullName, String age, String email, String userType, String Dollar, HashMap<String, Double> brokerMap) {
         this.fullName = fullName;
         this.age = age;
         this.email = email;
+        this.userType = userType;
+        this.initialMoney = Dollar;
+        this.brokerMap = brokerMap;
     }
 
     @Override

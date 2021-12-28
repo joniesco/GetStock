@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -17,21 +18,33 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-enum usersType {USER, BROKER};
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
     private RadioGroup radioGroup;
     private RadioButton broker, user ;
+
+
     private TextView banner , registerUser;
     private EditText editTextFullName , editTextEmail, editTextPassword,editTextAge;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     private String usersType = "None";
+    private static final String TAG = "Register";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,10 +133,13 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                     .show();
             return;
         }
+
         progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
-            if(task.isSuccessful()){
-                User user = new User(fullName,age,email);
+            if(task.isSuccessful() && usersType.equals("user")){
+                HashMap<String, Double> map = new HashMap<String, Double>();
+                map.put("test", 90.0);
+                User user = new User(fullName,age,email, "user", "1", map );
                 FirebaseDatabase.getInstance().getReference("Users")
                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                         .setValue(user).addOnCompleteListener(task1 -> {
@@ -136,6 +152,41 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                     }
                     progressBar.setVisibility(View.GONE);
                 });
+
+
+            }
+            else if(task.isSuccessful() && usersType.equals("broker")){
+
+                Broker broker =  new Broker(900.0);
+
+                db.collection("Brokers")
+                        .add(broker)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w(TAG, "Error adding document", e);
+                            }
+                        });
+
+
+                FirebaseDatabase.getInstance().getReference("Users")
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .setValue(broker).addOnCompleteListener(task1 -> {
+                           if(task1.isSuccessful()){
+                               Toast.makeText(Register.this,"Broker has been registered sucssesfully",Toast.LENGTH_LONG)
+                                       .show();
+                           }else{Toast.makeText(Register.this,"Broker has failed to register",Toast.LENGTH_LONG)
+                                   .show();
+
+                           }
+                    progressBar.setVisibility(View.GONE);
+                });
             }
             else{Toast.makeText(Register.this,"failed to register",Toast.LENGTH_LONG)
                     .show();
@@ -143,6 +194,26 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
             }
         });
+
+        HashMap<String, Double> map = new HashMap<String, Double>();
+        map.put("test", 90.0);
+
+        User user = new User(fullName,age,email, "user", "1", map );
+
+        db.collection("Users")
+                .add(user)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
     }
 }
 
