@@ -142,27 +142,24 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 //                Map<String, Double> map = new HashMap<String, Double>();
 
                 User user = new User(fullName,age,email, "user", "1", new HashMap<String, Double>());
+                String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                db.collection("Users")
-                        .add(user)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                db.collection("Users").document(UID)
+                        .set(user)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                            public void onSuccess(Void aVoid) {
+//                                Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                                 Toast.makeText(Register.this,"User has been registered sucssesfully",Toast.LENGTH_LONG)
-                                    .show();
+                                        .show();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error adding document", e);
                                 Toast.makeText(Register.this,"User has failed to register",Toast.LENGTH_LONG)
-                                    .show();
+                                        .show();
                             }
-
-
-
                         });
 
                 progressBar.setVisibility(View.GONE);
@@ -171,13 +168,14 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             else if(task.isSuccessful() && usersType.equals("broker")){
 
                 Broker broker =  new Broker(fullName,age,email,900.0);
+                String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                db.collection("Brokers")
-                        .add(broker)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                db.collection("Brokers").document(UID)
+                        .set(broker)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                            public void onSuccess(Void aVoid) {
+//                                Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                                 Toast.makeText(Register.this,"Broker has been registered sucssesfully",Toast.LENGTH_LONG)
                                         .show();
                             }
@@ -185,11 +183,12 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error adding document", e);
                                 Toast.makeText(Register.this,"Broker has failed to register",Toast.LENGTH_LONG)
                                         .show();
                             }
                         });
+
+
 
                 progressBar.setVisibility(View.GONE);
 

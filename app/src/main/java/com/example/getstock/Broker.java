@@ -37,8 +37,6 @@ public class Broker {
     }
 
 
-
-
     /**
      * Add a new user to our portfolio, with given amount.
      */

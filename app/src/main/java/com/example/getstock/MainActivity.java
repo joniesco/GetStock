@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -21,6 +22,11 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.getstock.databinding.ActivityMainBinding;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.core.Query;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button signIn;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +106,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    startActivity(new Intent(MainActivity.this,afterLogin.class));
+
+                    CollectionReference brokersRef = db.collection("Brokers");
+                    CollectionReference usersRef = db.collection("Users");
+
+
+
+                    Intent intent = new Intent(MainActivity.this,afterLogin.class) ;
+                    Bundle b = new Bundle();
+                    b.putString( "userId",FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+
+                    intent.putExtras(b);
+                    startActivity(intent);
 
                 }else{
                     Toast.makeText(MainActivity.this, "Failed to login!", Toast.LENGTH_LONG).show();
