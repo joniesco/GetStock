@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String userType;
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,25 +105,76 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
+
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
 
-                    CollectionReference brokersRef = db.collection("Brokers");
-                    CollectionReference usersRef = db.collection("Users");
+                    String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                    DocumentReference brokersRef = db.collection("Brokers").document(UID);
+
+                    DocumentReference usersRef = db.collection("Users").document(UID);
+
+                    //check if it is a broker
+                    brokersRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                    Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                    progressBar.setVisibility(View.GONE);
+
+                                    Broker broker = document.toObject(Broker.class);
+                                    Intent intent = new Intent(MainActivity.this,afterLogin.class) ;
+                                    intent.putExtra("broker", broker);
+
+                                    Toast.makeText(MainActivity.this,"welcome broker "+ broker.getFullName(),Toast.LENGTH_LONG)
+                                            .show();
+                                    startActivity(intent);
 
 
+                                } else {
+                                    Log.d(TAG, "No such document");
+                                }
+                            } else {
+                                Log.d(TAG, "get failed with ", task.getException());
+                            }
+                        }
+                    });
 
-                    Intent intent = new Intent(MainActivity.this,afterLogin.class) ;
-                    Bundle b = new Bundle();
-                    b.putString( "userId",FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    usersRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                    Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                    progressBar.setVisibility(View.GONE);
+
+                                    User user = document.toObject(User.class);
+                                    Intent intent = new Intent(MainActivity.this,afterLogin.class) ;
+                                    intent.putExtra("user", user);
+                                    Toast.makeText(MainActivity.this,"welcome user "+ user.getFullName(),Toast.LENGTH_LONG)
+                                            .show();
+                                    startActivity(intent);
 
 
-                    intent.putExtras(b);
-                    startActivity(intent);
+                                } else {
+                                    Log.d(TAG, "No such document");
+                                }
+                            } else {
+                                Log.d(TAG, "get failed with ", task.getException());
+                            }
+                        }
+                    });
+
+
 
                 }else{
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(MainActivity.this, "Failed to login!", Toast.LENGTH_LONG).show();
                 }
             }

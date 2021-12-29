@@ -1,5 +1,6 @@
 package com.example.getstock;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +9,7 @@ import java.util.Map;
  * invest for you.
  *
  */
-public class Broker {
+public class Broker implements Serializable {
 
     public Map<String, Double> usersInvesting; // a table containing User Id -> How much money did he give the broker.
     public Map<String, Integer> portfolio; //Symbol - > amount of stocks.
