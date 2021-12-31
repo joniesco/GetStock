@@ -14,6 +14,7 @@
     <!-- TODO: Update blank fragment layout -->
     <include layout="@layout/stock_partial"/>
         <!--Pie chart to display the data-->
+        <include layout="@layout/stock_full_page_partial" />
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,23 +62,7 @@
                     android:textStyle="bold"
                     android:fontFamily="@font/bebas_regular"/>
             </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp">
-                <TextView
-                    android:text="Stock Price"
-                    android:textColor="@color/nice_yellow"
-                    android:layout_marginLeft="10dp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/bebas_regular"/>
-                <TextView
-                    android:id="@+id/stock_price"
-                    android:layout_marginLeft="50dp"
-                    android:textColor="@color/nice_yellow"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/bebas_regular"/>
-            </TableRow>
+
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

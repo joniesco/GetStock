@@ -11,11 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -48,6 +52,9 @@ public class StockFullPageFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     Button sellStock, buyStock;
+
+    //Image
+    ImageView favoritesIcon;
 
     // variable for our bar chart
     LineChart lineChartDownFill;
@@ -145,6 +152,17 @@ public class StockFullPageFragment extends Fragment {
         marketCap = view.findViewById(R.id.market_cap);
         volume = view.findViewById(R.id.volume);
         exchange = view.findViewById(R.id.exchange);
+
+        //Image
+        favoritesIcon = view.findViewById(R.id.favorites);
+        favoritesIcon.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                favoritesIcon.setColorFilter(Color.RED);
+            }
+
+        });
 
         //Setup our Chart.
         lineChartDownFill = view.findViewById(R.id.idLineChart);
