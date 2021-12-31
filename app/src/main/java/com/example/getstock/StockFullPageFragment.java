@@ -53,6 +53,8 @@ public class StockFullPageFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     Button sellStock, buyStock;
 
+    boolean click = true;
+
     //Image
     ImageView favoritesIcon;
 
@@ -64,7 +66,7 @@ public class StockFullPageFragment extends Fragment {
     TextView symbolName, companyName, stockPrice,changeInPrice, percentChange;
     TextView openingPrice, previousClose, high, low, marketCap, volume, exchange;
 
-    private String []  stockDetails = new String[10];
+    private String []  stockDetails = new String[11];
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -112,6 +114,13 @@ public class StockFullPageFragment extends Fragment {
                 exchange.setText(stockDetails[1]);
                 stockPrice.setText(stockDetails[3]);
                 companyName.setText(stockDetails[2]);
+                changeInPrice.setText(stockDetails[4]);
+//                percentChange.setText(stockDetails[5]);
+                openingPrice.setText(stockDetails[6]);
+                previousClose.setText(stockDetails[7]);
+                high.setText(stockDetails[8]);
+                low.setText(stockDetails[9]);
+                volume.setText(stockDetails[10]);
             }
 
             @Override
@@ -122,7 +131,13 @@ public class StockFullPageFragment extends Fragment {
                     stockDetails[1] = myStock.getStockExchange(); //Exchange
                     stockDetails[2] = myStock.getName(); //Company name
                     stockDetails[3] = String.valueOf(myStock.getQuote().getPrice()); //stock price
-
+                    stockDetails[4] = String.valueOf(myStock.getQuote().getChange()); //stock change
+                    stockDetails[5] = myStock.getQuote().getChangeInPercent().toPlainString();
+                    stockDetails[6] = myStock.getQuote().getOpen().toPlainString();
+                    stockDetails[7] = myStock.getQuote().getPreviousClose().toPlainString();
+                    stockDetails[8] = myStock.getQuote().getDayHigh().toPlainString();
+                    stockDetails[9] = myStock.getQuote().getDayLow().toPlainString();
+                    stockDetails[10] = myStock.getQuote().getVolume().toString();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -154,12 +169,23 @@ public class StockFullPageFragment extends Fragment {
         exchange = view.findViewById(R.id.exchange);
 
         //Image
+
+
         favoritesIcon = view.findViewById(R.id.favorites);
         favoritesIcon.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                favoritesIcon.setColorFilter(Color.RED);
+                if(click){
+                    favoritesIcon.setColorFilter(R.color.nice_red);
+                    click = false;
+                }
+                else {
+                    favoritesIcon.setColorFilter(R.color.nice_yellow);
+                    click = true;
+                }
+
+
             }
 
         });

@@ -58,7 +58,7 @@
                 <TextView
                     android:id="@+id/exchange"
                     android:layout_marginLeft="50dp"
-                    android:textColor="@color/nice_yellow"
+                    android:textColor="@color/nice_blue"
                     android:textStyle="bold"
                     android:fontFamily="@font/bebas_regular"/>
             </TableRow>
@@ -76,7 +76,7 @@
                 <TextView
                     android:id="@+id/Price_Change"
                     android:layout_marginLeft="50dp"
-                    android:textColor="@color/nice_yellow"
+                    android:textColor="@color/nice_red"
                     android:textStyle="bold"
                     android:fontFamily="@font/bebas_regular"/>
             </TableRow>
@@ -93,7 +93,7 @@
                 <TextView
                     android:id="@+id/percentage"
                     android:layout_marginLeft="50dp"
-                    android:textColor="@color/nice_yellow"
+                    android:textColor="@color/nice_blue"
                     android:textStyle="bold"
                     android:fontFamily="@font/bebas_regular"/>
             </TableRow>
@@ -110,7 +110,7 @@
                 <TextView
                     android:id="@+id/opening_price"
                     android:layout_marginLeft="50dp"
-                    android:textColor="@color/nice_yellow"
+                    android:textColor="@color/nice_red"
                     android:textStyle="bold"
                     android:fontFamily="@font/bebas_regular"/>
             </TableRow>
@@ -127,7 +127,7 @@
                 <TextView
                     android:id="@+id/previous_close"
                     android:layout_marginLeft="50dp"
-                    android:textColor="@color/nice_yellow"
+                    android:textColor="@color/nice_blue"
                     android:textStyle="bold"
                     android:fontFamily="@font/bebas_regular"/>
             </TableRow>
@@ -144,7 +144,7 @@
                 <TextView
                     android:id="@+id/high"
                     android:layout_marginLeft="50dp"
-                    android:textColor="@color/nice_yellow"
+                    android:textColor="@color/nice_red"
                     android:textStyle="bold"
                     android:fontFamily="@font/bebas_regular"/>
             </TableRow>
@@ -162,7 +162,7 @@
                 <TextView
                     android:id="@+id/low"
                     android:layout_marginLeft="50dp"
-                    android:textColor="@color/nice_yellow"
+                    android:textColor="@color/nice_blue"
                     android:textStyle="bold"
                     android:fontFamily="@font/bebas_regular"/>
             </TableRow>
@@ -179,7 +179,7 @@
                 <TextView
                     android:id="@+id/market_cap"
                     android:layout_marginLeft="50dp"
-                    android:textColor="@color/nice_yellow"
+                    android:textColor="@color/nice_red"
                     android:textStyle="bold"
                     android:fontFamily="@font/bebas_regular"/>
             </TableRow>
@@ -195,7 +195,7 @@
                     android:fontFamily="@font/bebas_regular"/>
                 <TextView
                     android:id="@+id/volume"
-                    android:textColor="@color/nice_yellow"
+                    android:textColor="@color/nice_blue"
                     android:layout_marginLeft="50dp"
                     android:textStyle="bold"
                     android:fontFamily="@font/bebas_regular"/>
