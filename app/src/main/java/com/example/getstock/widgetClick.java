@@ -73,8 +73,8 @@ public class widgetClick extends AppCompatActivity implements VolleyCallback {
             e.printStackTrace();
         }
 
-        textView = (TextView) findViewById(R.id.textData);
-        textView.setText(Symbol);
+//        textView = (TextView) findViewById(R.id.textData);
+//        textView.setText(Symbol);
         JsonObjectRequest jor = updateAPIdata(Symbol,this);
         queue.add(jor);
 

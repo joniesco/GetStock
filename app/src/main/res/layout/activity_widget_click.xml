@@ -16,7 +16,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textData">
+        >
 
         <TableRow
             android:layout_width="match_parent"
@@ -26,13 +26,16 @@
             <TextView
                 android:text="Exchange"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/teal_200"
+                android:textColor="@color/nice_yellow"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_regular"
                 />
             <TextView
                 android:id="@+id/exchange"
                 android:layout_marginLeft="50dp"
-                android:textColor="@color/teal_700"
-                android:background="#30ffffff"/>
+                android:textColor="@color/nice_yellow"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_regular"/>
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -40,12 +43,16 @@
             android:layout_margin="10dp">
             <TextView
                 android:text="Stock Price"
-                android:textColor="@color/teal_200"
-                android:layout_marginLeft="10dp"/>
+                android:textColor="@color/nice_yellow"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_regular"/>
             <TextView
                 android:id="@+id/stock_price"
                 android:layout_marginLeft="50dp"
-                android:textColor="@color/teal_700"/>
+                android:textColor="@color/nice_yellow"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_regular"/>
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -53,25 +60,33 @@
             android:layout_margin="10dp">
             <TextView
                 android:text="Change in price"
-                android:textColor="@color/teal_200"
-                android:layout_marginLeft="10dp"/>
+                android:textColor="@color/nice_yellow"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_regular"/>
             <TextView
                 android:id="@+id/Price_Change"
                 android:layout_marginLeft="50dp"
-                android:textColor="@color/teal_700"/>
+                android:textColor="@color/nice_yellow"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_regular"/>
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp">
             <TextView
-                android:text="Percentage stock change"
-                android:textColor="@color/teal_200"
-                android:layout_marginLeft="10dp"/>
+                android:text="Percentage myStock change"
+                android:textColor="@color/nice_yellow"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_regular"/>
             <TextView
                 android:id="@+id/percentage"
                 android:layout_marginLeft="50dp"
-                android:textColor="@color/teal_700"/>
+                android:textColor="@color/nice_yellow"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_regular"/>
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -79,12 +94,16 @@
             android:layout_margin="10dp">
             <TextView
                 android:text="Opening price"
-                android:textColor="@color/teal_200"
-                android:layout_marginLeft="10dp"/>
+                android:textColor="@color/nice_yellow"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_regular"/>
             <TextView
                 android:id="@+id/opening_price"
                 android:layout_marginLeft="50dp"
-                android:textColor="@color/teal_700"/>
+                android:textColor="@color/nice_yellow"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_regular"/>
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -92,12 +111,16 @@
             android:layout_margin="10dp">
             <TextView
                 android:text="Previous close"
-                android:textColor="@color/teal_200"
-                android:layout_marginLeft="10dp"/>
+                android:textColor="@color/nice_yellow"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_regular"/>
             <TextView
                 android:id="@+id/previous_close"
                 android:layout_marginLeft="50dp"
-                android:textColor="@color/teal_700"/>
+                android:textColor="@color/nice_yellow"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_regular"/>
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -105,12 +128,16 @@
             android:layout_margin="10dp">
             <TextView
                 android:text="High"
-                android:textColor="@color/teal_200"
-                android:layout_marginLeft="10dp"/>
+                android:textColor="@color/nice_yellow"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_regular"/>
             <TextView
                 android:id="@+id/high"
                 android:layout_marginLeft="50dp"
-                android:textColor="@color/teal_700"/>
+                android:textColor="@color/nice_yellow"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_regular"/>
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -119,12 +146,16 @@
             >
             <TextView
                 android:text="Low"
-                android:textColor="@color/teal_200"
-                android:layout_marginLeft="10dp"/>
+                android:textColor="@color/nice_yellow"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_regular"/>
             <TextView
                 android:id="@+id/low"
                 android:layout_marginLeft="50dp"
-                android:textColor="@color/teal_700"/>
+                android:textColor="@color/nice_yellow"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_regular"/>
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -132,12 +163,16 @@
             android:layout_margin="10dp">
             <TextView
                 android:text="Market capitalisation"
-                android:textColor="@color/teal_200"
-                android:layout_marginLeft="10dp"/>
+                android:textColor="@color/nice_yellow"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_regular"/>
             <TextView
                 android:id="@+id/market_cap"
                 android:layout_marginLeft="50dp"
-                android:textColor="@color/teal_700"/>
+                android:textColor="@color/nice_yellow"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_regular"/>
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -145,12 +180,16 @@
             android:layout_margin="10dp">
             <TextView
                 android:text="Volume"
-                android:textColor="@color/teal_200"
-                android:layout_marginLeft="10dp"/>
+                android:textColor="@color/nice_yellow"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_regular"/>
             <TextView
                 android:id="@+id/volume"
-                android:textColor="@color/teal_700"
-                android:layout_marginLeft="50dp"/>
+                android:textColor="@color/nice_yellow"
+                android:layout_marginLeft="50dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_regular"/>
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -171,18 +210,6 @@
         </TableRow>
     </TableLayout>
 
-    <TextView
-        android:id="@+id/textData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="472dp"
-        android:textColor="@color/teal_700"
-        android:text="This test"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.412" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

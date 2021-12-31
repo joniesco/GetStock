@@ -16,7 +16,7 @@
 
 
         <TextView
-            android:id="@+id/stock"
+            android:id="@+id/myStock"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:padding="2dp"
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/stock"
+            android:layout_toEndOf="@+id/myStock"
             android:text="Line 1"
             android:textColor="@color/teal_200"
             android:textSize="20sp"
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/symbol"
             android:layout_marginStart="8dp"
-            android:layout_toEndOf="@+id/stock"
+            android:layout_toEndOf="@+id/myStock"
             android:text="Line 2"
             android:textSize="15sp" />
 

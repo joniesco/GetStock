@@ -2,7 +2,6 @@ package com.example.getstock;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,14 +26,14 @@ import java.util.List;
  */
 public class StockSearchAdapter extends RecyclerView.Adapter<StockSearchAdapter.StockViewHolder> implements Filterable {
 
-    private List<Stock> stockList;
-    private List<Stock> stockListFull;
+    private List<MyStock> myStockList;
+    private List<MyStock> myStockListFull;
     Context ct;
     Fragment ft;
 
-    StockSearchAdapter(List<Stock> stockList, Context ct, Fragment ft) {
-        this.stockList= stockList;
-        stockListFull= new ArrayList<>(stockList);
+    StockSearchAdapter(List<MyStock> myStockList, Context ct, Fragment ft) {
+        this.myStockList = myStockList;
+        myStockListFull = new ArrayList<>(myStockList);
         this.ct = ct;
         this.ft = ft;
     }
@@ -47,14 +46,14 @@ public class StockSearchAdapter extends RecyclerView.Adapter<StockSearchAdapter.
     private Filter stockFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<Stock> filteredList = new ArrayList<>();
+            List<MyStock> filteredList = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
-                filteredList.addAll(stockListFull);
+                filteredList.addAll(myStockListFull);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (Stock item : stockListFull) {
+                for (MyStock item : myStockListFull) {
                     if (item.getSymbol().toLowerCase().contains(filterPattern)) {
                         filteredList.add(item);
                     }
@@ -69,8 +68,8 @@ public class StockSearchAdapter extends RecyclerView.Adapter<StockSearchAdapter.
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            stockList.clear();
-            stockList.addAll((List) results.values);
+            myStockList.clear();
+            myStockList.addAll((List) results.values);
             notifyDataSetChanged();
         }
     };
@@ -85,12 +84,12 @@ public class StockSearchAdapter extends RecyclerView.Adapter<StockSearchAdapter.
 
         StockViewHolder(View itemView) {
             super(itemView);
-            Symbol = itemView.findViewById(R.id.stock);
-            desc = itemView.findViewById(R.id.desc);
-            market = itemView.findViewById(R.id.symbol);
-            percentage = itemView.findViewById(R.id.percentageChange);
-            imageArrow = itemView.findViewById(R.id.percentageImage);
-            cardView = itemView.findViewById(R.id.search_card);
+//            Symbol = itemView.findViewById(R.id.stock);
+//            desc = itemView.findViewById(R.id.desc);
+//            market = itemView.findViewById(R.id.symbol);
+//            percentage = itemView.findViewById(R.id.percentageChange);
+//            imageArrow = itemView.findViewById(R.id.percentageImage);
+//            cardView = itemView.findViewById(R.id.search_card);
         }
     }
     @NonNull
@@ -103,14 +102,14 @@ public class StockSearchAdapter extends RecyclerView.Adapter<StockSearchAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull StockSearchAdapter.StockViewHolder holder, int position) {
-        Stock stock = stockList.get(position);
+        MyStock myStock = myStockList.get(position);
 
-        holder.Symbol.setText(stock.getSymbol());
-        holder.desc.setText(stock.getDesc());
-        holder.market.setText(stock.getMarket());
-        holder.percentage.setText(stock.percentChange);
+        holder.Symbol.setText(myStock.getSymbol());
+        holder.desc.setText(myStock.getDesc());
+        holder.market.setText(myStock.getMarket());
+        holder.percentage.setText(myStock.percentChange);
 
-        if(stock.percentIsPositive) {
+        if(myStock.percentIsPositive) {
             holder.imageArrow.setImageResource(R.drawable.ic_arrow_upward);
             holder.imageArrow.setColorFilter(Color.parseColor("#519259"));
             holder.percentage.setTextColor(Color.parseColor("#519259"));
@@ -149,6 +148,6 @@ public class StockSearchAdapter extends RecyclerView.Adapter<StockSearchAdapter.
 
     @Override
     public int getItemCount() {
-        return stockList.size();
+        return myStockList.size();
     }
 }

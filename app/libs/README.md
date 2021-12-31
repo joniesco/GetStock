@@ -30,16 +30,16 @@ dependencies {
 ```
 
 # Examples
-## Single stock
+## Single myStock
 ```java
-Stock stock = YahooFinance.get("INTC");
+Stock myStock = YahooFinance.get("INTC");
 
-BigDecimal price = stock.getQuote().getPrice();
-BigDecimal change = stock.getQuote().getChangeInPercent();
-BigDecimal peg = stock.getStats().getPeg();
-BigDecimal dividend = stock.getDividend().getAnnualYieldPercent();
+BigDecimal price = myStock.getQuote().getPrice();
+BigDecimal change = myStock.getQuote().getChangeInPercent();
+BigDecimal peg = myStock.getStats().getPeg();
+BigDecimal dividend = myStock.getDividend().getAnnualYieldPercent();
 
-stock.print();
+myStock.print();
 ```
 Output:
 ```
@@ -56,12 +56,12 @@ history: null
 --------------------------------
 ```
 
-## Single stock, easy refresh
+## Single myStock, easy refresh
 ```java
-Stock stock = YahooFinance.get("INTC");
-double price = stock.getQuote(true).getPrice();
+Stock myStock = YahooFinance.get("INTC");
+double price = myStock.getQuote(true).getPrice();
 ```
-This will also automatically refresh the statistics and dividend data of the stock in a single request to Yahoo Finance.
+This will also automatically refresh the statistics and dividend data of the myStock in a single request to Yahoo Finance.
 Please be aware that it wouldn't be a good idea to call the getQuote(true), getStats(true) or getDividend(true) too much in a short timespan as this will cost too much delay without providing any added value. There's no problem to call the versions of those methods without argument or with the argument set to false.
 
 ## Multiple stocks at once
@@ -85,7 +85,7 @@ USDEUR=X: 0.7842
 USDGBP=X: 0.6253
 ```
 
-## Single stock, include historical quotes (1)
+## Single myStock, include historical quotes (1)
 ```java
 Stock tesla = YahooFinance.get("TSLA", true);
 System.out.println(tesla.getHistory());
@@ -95,7 +95,7 @@ Output: (Symbol@Date: low-high, open->close (adjusted close))
 [TSLA@2014-10-01: 217.32-265.54, 242.2->229.7 (229.7), TSLA@2014-09-02: 240.12-291.42, 275.5->242.68 (242.68), ...]
 ```
 
-## Single stock, include historical quotes (2)
+## Single myStock, include historical quotes (2)
 ```java
 Calendar from = Calendar.getInstance();
 Calendar to = Calendar.getInstance();

@@ -26,7 +26,7 @@ import java.util.List;
 public class favoFragment extends Fragment {
 
     private RecyclerView favoritesRecyclerView;
-    private List<Stock> stockList;
+    private List<MyStock> myStockList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,7 +39,7 @@ public class favoFragment extends Fragment {
         favoritesRecyclerView = view.findViewById(R.id.favoritesRecycler);
         favoritesRecyclerView.setHasFixedSize(true);
         favoritesRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        favoritesRecyclerView.setAdapter(new StockSearchAdapter(stockList,view.getContext() ,this));
+        favoritesRecyclerView.setAdapter(new StockSearchAdapter(myStockList,view.getContext() ,this));
 
         return view;
     }
@@ -58,16 +58,16 @@ public class favoFragment extends Fragment {
      *
      */
         private void fillExampleList() {
-            stockList = new ArrayList<>();
-            stockList.add(new Stock("AAA", "One", "Ten"));
-            stockList.add(new Stock("APL", "Two", "Eleven"));
-            stockList.add(new Stock("BBB", "Three", "Twelve"));
-            stockList.add(new Stock("APA", "Four", "Thirteen"));
-            stockList.add(new Stock("APA", "Five", "Fourteen"));
-            stockList.add(new Stock("APA", "Six", "Fifteen"));
-            stockList.add(new Stock("APA", "Seven", "Sixteen"));
-            stockList.add(new Stock("APA", "Eight", "Seventeen"));
-            stockList.add(new Stock("APA", "Nine", "Eighteen"));
+            myStockList = new ArrayList<>();
+            myStockList.add(new MyStock("AAA", "One", "Ten"));
+            myStockList.add(new MyStock("APL", "Two", "Eleven"));
+            myStockList.add(new MyStock("BBB", "Three", "Twelve"));
+            myStockList.add(new MyStock("APA", "Four", "Thirteen"));
+            myStockList.add(new MyStock("APA", "Five", "Fourteen"));
+            myStockList.add(new MyStock("APA", "Six", "Fifteen"));
+            myStockList.add(new MyStock("APA", "Seven", "Sixteen"));
+            myStockList.add(new MyStock("APA", "Eight", "Seventeen"));
+            myStockList.add(new MyStock("APA", "Nine", "Eighteen"));
         }
 
     /**

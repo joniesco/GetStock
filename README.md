@@ -1,5 +1,5 @@
 # GetStock
-GetStock is a free stock screener.
+GetStock is a free myStock screener.
 
 # Description
 The project uses an external API to perform the search query and rest of the API calls.
@@ -31,10 +31,10 @@ then they will be brought to a screen containing all the necessary details.
 | Main activity | Entrance screen for login/register | extends AppCompatActivity implements View.OnClickListener |
 | Register | Class for register a user with name,age,mail and password | extends AppCompatActivity implements View.OnClickListener |
 | User | This Class represents a user (name,age and email) | -------- |
-| Profile activity | This Class represents a home page for user where he can search for a stock | extends AppCompatActivity implements View.OnClickListener |
-| CustomaAdapter| Making a list of stock results to be dinamic | extends RecyclerView.Adapter<CustomAdapter.ViewHolder> |
+| Profile activity | This Class represents a home page for user where he can search for a myStock | extends AppCompatActivity implements View.OnClickListener |
+| CustomaAdapter| Making a list of myStock results to be dinamic | extends RecyclerView.Adapter<CustomAdapter.ViewHolder> |
 | SearchResult| A class to display the results of the user's search | extends AppCompatActivity |
-| widgetClick| A class to display some details on a spesific stock from the search results | extends AppCompatActivity implements VolleyCallback |
+| widgetClick| A class to display some details on a spesific myStock from the search results | extends AppCompatActivity implements VolleyCallback |
 
 
 

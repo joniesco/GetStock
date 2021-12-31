@@ -1,53 +1,50 @@
 package com.example.getstock;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * This class represents a broker that can
  * invest for you.
  *
  */
-public class Broker implements GeneralUser{
-    Map<String, Double> UsersInvesting; // a table containing User Id -> How much money did he give the broker.
-    Map<String, Integer> Portfolio; //Symbol - > amount of stocks.
-    double initialMoney;
-    final double buyingCommission = 0.05;
-    final double sellingCommission = 0.02;
-    private double brokerCommission;
+public class Broker {
 
-    public Broker(double brokerCommission){
-        UsersInvesting = new HashMap<>();
-        Portfolio = new HashMap<>();
-        initialMoney = 50000;
+    public Map<String, Double> usersInvesting; // a table containing User Id -> How much money did he give the broker.
+    public Map<String, Integer> portfolio; //Symbol - > amount of stocks.
+    public Double initialMoney;
+    public Double buyingCommission ;
+    public Double sellingCommission ;
+    public String userType ;
+    public Double brokerCommission;
+    public String fullName,age,email;
+
+    public Broker(){}
+
+    public Broker(  String fullName,String age,String email, Double brokerCommission) {
+        usersInvesting = new HashMap<String, Double>();
+        portfolio = new HashMap<String, Integer>();
+
+        this.age=age;
+        this.fullName = fullName;
+        this.email= email;
+
+        this.initialMoney = 0.0;
+        this.buyingCommission = 0.05;
+        this.sellingCommission = 0.02;
+        this.userType = "Broker";
         this.brokerCommission = brokerCommission;
     }
-    @Override
-    public String getFullName() {
-        return null;
-    }
 
-    @Override
-    public String getEmail() {
-        return null;
-    }
-
-    @Override
-    public String getAge() {
-        return null;
-    }
-
-    @Override
-    public String getUserScore() {
-        return null;
-    }
 
     /**
      * Add a new user to our portfolio, with given amount.
      */
     public void AddUser(String email, Double amount){
         if(email!=null && amount!=null && amount>0){
-            UsersInvesting.put(email, amount);
+            usersInvesting.put(email, amount);
         }
         initialMoney += amount;
     }
@@ -67,12 +64,12 @@ public class Broker implements GeneralUser{
         }
         else {
 
-            if (Portfolio.get(Symbol) == null) {
+            if (portfolio.get(Symbol) == null) {
                 System.out.println("Added a new stock");
-                Portfolio.put(Symbol, quantity);
+                portfolio.put(Symbol, quantity);
             } else {
                 System.out.println("Add to existing stock");
-                Portfolio.put(Symbol, quantity);
+                portfolio.put(Symbol, quantity);
             }
         }
         initialMoney -= buyStockWithCommission;
@@ -87,15 +84,15 @@ public class Broker implements GeneralUser{
     public void sellStock(String Symbol, int quantity, double stockPrice){
         double sellStockWithCommission = stockPrice *quantity*sellingCommission;
 
-        if(Portfolio.get(Symbol)==null){
+        if(portfolio.get(Symbol)==null){
             System.out.println("No such stock exists");
         }
-        if(Portfolio.get(Symbol) < quantity){
+        if(portfolio.get(Symbol) < quantity){
             System.out.println("Not enough stocks to sell");
         }
 
-        int initialQuantity = Portfolio.get(Symbol);
-        Portfolio.put(Symbol,initialQuantity  + quantity );
+        int initialQuantity = portfolio.get(Symbol);
+        portfolio.put(Symbol,initialQuantity  + quantity );
         initialMoney += sellStockWithCommission;
     }
 
@@ -104,10 +101,57 @@ public class Broker implements GeneralUser{
      * @return
      */
     public Double giveMoneyBackToUser(String email){
-        if(UsersInvesting.get(email) == null && email!=null){
+        if(usersInvesting.get(email) == null && email!=null){
             System.out.println("No such user exist");
         }
-        initialMoney -= UsersInvesting.get(email);
-        return UsersInvesting.get(email) * (1 - brokerCommission);
+        initialMoney -= usersInvesting.get(email);
+        return usersInvesting.get(email) * (1 - brokerCommission);
+    }
+
+    public Map<String, Integer> getUsersInvesting() {
+        return portfolio;
+    }
+    public Map<String, Integer> getPortfolio() {
+        return portfolio;
+    }
+
+    public Double getInitialMoney() {
+        return initialMoney;
+    }
+
+    public Double getBuyingCommission() {
+        return buyingCommission;
+    }
+
+    public Double getSellingCommission() {
+        return sellingCommission;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public Double getBrokerCommission() {
+        return brokerCommission;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * Get a list of all users.
+     * @return
+     */
+    public Set<String> getUserList(){
+        return usersInvesting.keySet();
     }
 }

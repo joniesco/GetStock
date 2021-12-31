@@ -23,6 +23,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import org.eazegraph.lib.charts.PieChart;
+import org.eazegraph.lib.models.PieModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +88,7 @@ public class StockRecommendorAdapter extends RecyclerView.Adapter<StockRecommend
         TextView PostTitle;
         ImageView profilePicture;
         CardView cardView;
+        PieChart pieChart;
 
         StockRecommendorViewHolder(View itemView) {
             super(itemView);
@@ -93,7 +96,7 @@ public class StockRecommendorAdapter extends RecyclerView.Adapter<StockRecommend
             PostTitle = itemView.findViewById(R.id.title_of_post);
             profilePicture = itemView.findViewById(R.id.profile_picture);
             cardView = itemView.findViewById(R.id.click_post);
-
+            pieChart = itemView.findViewById(R.id.piechart);
 
         }
     }
@@ -110,10 +113,34 @@ public class StockRecommendorAdapter extends RecyclerView.Adapter<StockRecommend
     public void onBindViewHolder(@NonNull StockRecommendorAdapter.StockRecommendorViewHolder holder, int position) {
         UserPost userpost = stockList.get(position);
 
-        holder.PostTitle.setText(userpost.getPostTitle());
-        holder.postDescription.setText(userpost.getDesc());
-        holder.profilePicture.setImageResource(R.drawable.ic_accessibility);
-        holder.profilePicture.setColorFilter(Color.parseColor("#519259"));
+        //Create pie chart
+        holder.pieChart.addPieSlice(
+                new PieModel(
+                        "AAPL" +
+                                "",
+                        Integer.parseInt(Integer.toString(40)),
+                        Color.parseColor("#FFA726")));
+        holder.pieChart.addPieSlice(
+                new PieModel(
+                        "STK",
+                        Integer.parseInt(Integer.toString(30)),
+                        Color.parseColor("#66BB6A")));
+        holder.pieChart.addPieSlice(
+                new PieModel(
+                        "RPQ",
+                        Integer.parseInt(Integer.toString(5)),
+                        Color.parseColor("#EF5350")));
+        holder.pieChart.addPieSlice(
+                new PieModel(
+                        "TND",
+                        Integer.parseInt(Integer.toString(25)),
+                        Color.parseColor("#29B6F6")));
+        holder.pieChart.setBackgroundColor(ct.getResources().getColor(R.color.nice_yellow));
+
+//        holder.PostTitle.setText(userpost.getPostTitle());
+//        holder.postDescription.setText(userpost.getDesc());
+//        holder.profilePicture.setImageResource(R.drawable.ic_accessibility);
+//        holder.profilePicture.setColorFilter(Color.parseColor("#519259"));
 
         //Create our fragment to show broker
         Fragment showPost = new showPostFragment();
@@ -121,26 +148,26 @@ public class StockRecommendorAdapter extends RecyclerView.Adapter<StockRecommend
         bundle.putString("message", "From Activity"); //Attach the new fragment an instance of broker to show.
         showPost.setArguments(bundle);
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            /**
-             * Define an what happens when you click a widget.
-             *
-             * @param v
-             */
-            @Override
-            public void onClick(View v) {
-
-                FragmentManager fragmentManager = ((FragmentActivity) ct).getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, showPost);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-//                Intent intent = new Intent(ct, widgetClick.class);
-//                intent.putExtra("Code", "asd");
-//                ct.startActivity(intent);
-            }
-
-        });
+//        holder.cardView.setOnClickListener(new View.OnClickListener() {
+//            /**
+//             * Define an what happens when you click a widget.
+//             *
+//             * @param v
+//             */
+//            @Override
+//            public void onClick(View v) {
+//
+//                FragmentManager fragmentManager = ((FragmentActivity) ct).getSupportFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.fragment_container, showPost);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.commit();
+////                Intent intent = new Intent(ct, widgetClick.class);
+////                intent.putExtra("Code", "asd");
+////                ct.startActivity(intent);
+//            }
+//
+//        });
 
     }
 

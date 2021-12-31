@@ -6,14 +6,14 @@ import java.util.Random;
 /**
  * This class represents a stock.
  */
-public class Stock {
+public class MyStock {
     String Symbol;
     String desc;
     String market;
     String percentChange;
     boolean percentIsPositive;
 
-    public Stock(String Symbol, String desc, String market){
+    public MyStock(String Symbol, String desc, String market){
         this.Symbol = Symbol;
         this.desc = desc;
         this.market = market;

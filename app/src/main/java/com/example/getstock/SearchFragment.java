@@ -11,6 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,6 +52,7 @@ public class SearchFragment extends Fragment {
     private SearchView.OnQueryTextListener queryTextListener;
     private TextView textView;
     final String[] s = {""};
+    Context ct;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,7 +60,7 @@ public class SearchFragment extends Fragment {
         setHasOptionsMenu(true);
         View view =  inflater.inflate(R.layout.fragment_search, container, false);
         textView = view.findViewById(R.id.yahoo_stock);
-
+        ct = getContext();
 
 
 
@@ -67,10 +71,28 @@ public class SearchFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Fragment stockFullPage = new StockFullPageFragment();
+        textView.setOnClickListener(new View.OnClickListener(){
+
+        @Override
+        public void onClick(View v) {
+
+                FragmentManager fragmentManager = ((FragmentActivity) ct).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, stockFullPage);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+//                Intent intent = new Intent(ct, widgetClick.class);
+//                intent.putExtra("Code", "asd");
+//                ct.startActivity(intent);
+            }
+
+        });
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPostExecute(Void unused) {
                 textView.setText(s[0]);
+
             }
 
             @Override

@@ -7,6 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="light_blue">#D6E5FA</color>
+    <!-- Cool Theme -->
+
+    <color name="nice_blue">#2D4263</color>
+    <color name="nice_yellow">#ECDBBA</color>
+    <color name="nice_red">#C84B31</color>
+
 
     <!-- Grey -->
     <color name="grey_50">#FAFAFA</color>
