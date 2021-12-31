@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:backgroundTint="@color/purple_200">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            android:elevation="10dp"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/nice_blue">
+
+                <ImageView
+                    android:id="@+id/money"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_money_24"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/nice_yellow"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your Balance"
+                    android:textColor="@color/nice_yellow"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/bebas_regular"
+                    android:layout_gravity="center"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/nice_yellow"
+                    android:text="$1,223,442"
+                    android:fontFamily="@font/bebas_regular"
+                    android:layout_gravity="center"
+                    android:textSize="11sp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            android:elevation="10dp"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/teal_700">
+
+                <ImageView
+                    android:id="@+id/contacts"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_people_24"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Clients"
+                    android:textColor="@color/main_color"
+                    android:fontFamily="@font/bebas_regular"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/main_color"
+                    android:fontFamily="@font/bebas_regular"
+                    android:text="23"
+                    android:layout_gravity="center"
+                    android:textSize="11sp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="8dp"
+            android:elevation="10dp"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/nice_blue">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_notifications"
+                    android:layout_gravity="center"
+                    />
+
+                <TextView
+                    android:id="@+id/title_of_post"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Notifications"
+                    android:textColor="@color/nice_yellow"
+                    android:fontFamily="@font/bebas_regular"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    />
+
+                <TextView
+                    android:id="@+id/postDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/nice_yellow"
+                    android:fontFamily="@font/bebas_regular"
+                    android:text="0"
+                    android:layout_gravity="center"
+                    android:textSize="11sp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+</LinearLayout>

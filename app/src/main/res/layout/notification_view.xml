@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:cardCornerRadius="8dp"
+        android:elevation="10dp"
+        android:id="@+id/daily_notifications"
+        android:layout_marginTop="30dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/nice_blue">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:padding="2dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    app:cardCornerRadius="8dp"
+                    android:elevation="10dp"
+                    android:id="@+id/notification_icon">
+
+                <ImageView
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:padding="2dp"
+                    android:textColor="@color/teal_700"
+                    android:src="@drawable/ic_notifications"
+                    app:tint="@color/light_blue"
+                    />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/greeting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@+id/notification_icon"
+                    android:fontFamily="@font/acme"
+                    android:gravity="center"
+                    android:text="You've got 0 notifications !"
+                    android:textColor="@color/nice_yellow"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/greeting"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@+id/notification_icon"
+                    android:fontFamily="@font/acme"
+                    android:text="Don't forget to check your clients status!"
+                    android:textColor="@color/nice_yellow"
+                    android:textSize="14sp"
+                    />
+
+        </RelativeLayout>
+</androidx.cardview.widget.CardView>

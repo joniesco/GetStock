@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="220dp"
+    android:layout_height="40dp"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="8dp"
+    android:elevation="10dp"
+    android:layout_marginLeft="10dp"
+    app:cardBackgroundColor="@color/nice_blue"
+    android:id="@+id/click_post">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_notifications"
+        android:id="@+id/notification_icon"
+        android:layout_marginTop="2dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@+id/notification_icon"
+        android:fontFamily="@font/bebas_regular"
+        android:layout_marginTop="7dp"
+        android:text="Allow Notifications"
+        android:textSize="13sp"
+        android:id="@+id/allow_notification"/>
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/allow_notification"
+            android:layout_marginLeft="45dp"
+            android:scrollbarSize="3dp"
+            android:scaleX="1"
+            android:scaleY="1"
+            android:showText="false"/>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

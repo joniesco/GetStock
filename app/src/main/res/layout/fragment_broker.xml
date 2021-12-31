@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".brokerFragment"
+    android:background="#191919">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
+
+        <!-- Main header -->
+        <include layout="@layout/home_layout1" />
+
+        <!-- Notification header -->
+        <include layout="@layout/notification_view" />
+
+        <TextView
+            android:id="@+id/myClients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/chivo"
+            android:text="My Clients"
+            android:textColor="@color/grey_300"
+            android:textStyle="bold" />
+
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            tools:context=".ClientsFragment"
+            android:background="#191919"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/clients_fragment_container">
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/MyStocks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/chivo"
+            android:text="My Stocks"
+            android:textColor="@color/grey_300"
+            android:textStyle="bold" />
+
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            tools:context=".ClientsFragment"
+            android:background="#191919"
+            android:id="@+id/stocks_fragment_container"></FrameLayout>
+    </LinearLayout>
+</FrameLayout>
