@@ -1,5 +1,6 @@
 package com.example.getstock;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,7 +10,7 @@ import java.util.Map;
 /**
  * This class represents a general user.
  */
-public class User {
+public class User implements Serializable {
 
     public String userType;
     public String fullName,age,email;

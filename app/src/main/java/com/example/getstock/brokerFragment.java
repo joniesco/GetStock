@@ -33,10 +33,12 @@ public class brokerFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    //Init page elements
     TextView name;
     ImageView profilePic;
     Bundle args;
 
+    //Get our DB instance.
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     // TODO: Rename and change types of parameters
@@ -78,6 +80,7 @@ public class brokerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        //get args from previous page.
         args = this.getArguments();
         String email = args.getString("userId");
         String userType = args.getString("UserType");
@@ -87,6 +90,7 @@ public class brokerFragment extends Fragment {
         profilePic = view.findViewById(R.id.profile_pic);
         name = view.findViewById(R.id.desc);
 
+        //Change profile pic according to user logged in.
         if(userType.equals("Broker")){
             profilePic.setImageResource(R.drawable.business_man2);
         }
@@ -97,12 +101,19 @@ public class brokerFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Fragment childFragment = new ClientsFragment();
+        //Create our 2 fragments.
+        Fragment clientsFragment = new ClientsFragment();
         Fragment stocksFragment = new StocksFragment();
 
+        //Create the bundle to pass to next page.
         Bundle userData = new Bundle();
         userData.putString("user", "data");
         String TAG = "";
+
+        //users email
+        String email = "stam@stam";
+
+
 
         //CREATE
         db.collection("Brokers")
@@ -129,12 +140,12 @@ public class brokerFragment extends Fragment {
                 });
 
         //Transfer user data to clients fragment and stocks fragment.
-        childFragment.setArguments(userData);
+        clientsFragment.setArguments(userData);
         stocksFragment.setArguments(userData);
 
         //Create the small clients list.
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.clients_fragment_container, childFragment).commit();
+        transaction.replace(R.id.clients_fragment_container, clientsFragment).commit();
 
         //Create the small favorite stocks.
         FragmentTransaction transaction1 = getChildFragmentManager().beginTransaction();
