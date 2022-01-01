@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class BrokerListFragment extends Fragment {
 
-    List<UserPost> postList; //list to hold all items.
+    List<Broker> brokerList; //list to hold all items.
     RecyclerView brokerListRecyclerView; //the layout.
 
     @Override
@@ -36,6 +36,8 @@ public class BrokerListFragment extends Fragment {
 
         //populate our list.
         fillExampleList();
+        //Make sure we pass a list that is already filtered, i.e. client won't see any brokers that he already has.
+
 
         // create a recycler view and populate it, with our designed adapter.
         brokerListRecyclerView = view.findViewById(R.id.broker_recycler); //bind the id.
@@ -43,21 +45,21 @@ public class BrokerListFragment extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(view.getContext()); //create a new linear layout programmatically.
         llm.setOrientation(RecyclerView.VERTICAL); //set it to vertical mode.
         brokerListRecyclerView.setLayoutManager(llm); //set our recycler view to contain the new linear layout.
-        brokerListRecyclerView.setAdapter(new BrokerListAdapter(postList,view.getContext(),this)); //inserting adapter.
+        brokerListRecyclerView.setAdapter(new BrokerListAdapter(brokerList,view.getContext(),this)); //inserting adapter.
 
         return view;
     }
 
     private void fillExampleList() {
-        postList = new ArrayList<>();
-        postList.add(new UserPost("David Blaine", "One", "Ten"));
-        postList.add(new UserPost("Archie22", "Two", "Eleven"));
-        postList.add(new UserPost("Ben jake", "Three", "Twelve"));
-        postList.add(new UserPost("guitarHERO", "Four", "Thirteen"));
-        postList.add(new UserPost("broker ben", "Five", "Fourteen"));
-        postList.add(new UserPost("candytimes jhon", "Six", "Fifteen"));
-        postList.add(new UserPost("test", "Seven", "Sixteen"));
-        postList.add(new UserPost("test", "Eight", "Seventeen"));
-        postList.add(new UserPost("test", "Nine", "Eighteen"));
+        brokerList = new ArrayList<>();
+        brokerList.add(new Broker("David Blaine", "One", "Ten", 0.5));
+        brokerList.add(new Broker("Archie22", "Two", "Eleven",0.3));
+        brokerList.add(new Broker("Ben jake", "Three", "Twelve", 0.3));
+        brokerList.add(new Broker("guitarHERO", "Four", "Thirteen", 0.3));
+        brokerList.add(new Broker("broker ben", "Five", "Fourteen",0.5));
+        brokerList.add(new Broker("candytimes jhon", "Six", "Fifteen",0.1));
+        brokerList.add(new Broker("test", "Seven", "Sixteen",0.2));
+        brokerList.add(new Broker("test", "Eight", "Seventeen", 0.4));
+        brokerList.add(new Broker("test", "Nine", "Eighteen", 0.2));
     }
 }

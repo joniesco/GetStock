@@ -32,7 +32,7 @@
             />
 
         <TextView
-            android:id="@+id/title_of_post"
+            android:id="@+id/broker_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -48,7 +48,7 @@
             android:id="@+id/postDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/title_of_post"
+            android:layout_below="@+id/broker_name"
             android:layout_toEndOf="@+id/broker_profile_picture"
             android:textColor="@color/nice_yellow"
             android:text="Ex. wallstreet pro"
@@ -94,7 +94,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginLeft="2dp"
             android:textColor="@color/nice_yellow"
-            android:text="Experience"
+            android:text="Commision"
             android:textSize="15sp"
             android:fontFamily="@font/bebas_regular"
             android:id="@+id/experience"/>
@@ -118,10 +118,10 @@
             android:layout_marginLeft="12dp"
             android:layout_marginTop="2dp"
             android:textColor="@color/nice_red"
-            android:text="4 years"
+            android:text="0.5"
             android:textSize="15sp"
             android:fontFamily="@font/bebas_regular"
-            android:id="@+id/num_of_experience"/>
+            android:id="@+id/commision"/>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
@@ -133,7 +133,7 @@
         app:cardCornerRadius="8dp"
         android:elevation="10dp"
         app:cardBackgroundColor="@color/nice_blue"
-        >
+        android:id="@+id/add_broker">
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -146,6 +146,61 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="102dp"
+        android:layout_toEndOf="@id/broker_item"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="4dp"
+        app:cardCornerRadius="8dp"
+        android:elevation="10dp"
+        app:cardBackgroundColor="@color/nice_blue"
+        android:layout_toRightOf="@+id/add_broker"
+        android:id="@+id/add_box"
+        >
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/nice_red"
+                android:text="type amount"
+                android:textSize="15sp"
+                android:fontFamily="@font/bebas_regular"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:id="@+id/amount"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/amount"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:fontFamily="@font/bebas_regular"
+                android:hint="i.e : 1000"
+                android:textColor="@color/nice_yellow"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/send_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/input_amount"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:fontFamily="@font/bebas_regular"
+                android:text="send request"
+                android:textColor="@color/nice_yellow"
+                android:textSize="13dp" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>
