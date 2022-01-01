@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="8dp"
+    android:elevation="10dp"
+    android:layout_marginRight="5dp"
+    app:cardBackgroundColor="@color/nice_blue"
+    android:id="@+id/broker_item">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="4dp">
+
+
+
+        <ImageView
+            android:id="@+id/broker_profile_picture"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="2dp"
+            android:src="@drawable/amanda_waller_icon"
+            />
+
+        <TextView
+            android:id="@+id/title_of_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/broker_profile_picture"
+            android:text="Wilson Fisk"
+            android:textColor="@color/nice_yellow"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/bebas_regular"
+            />
+
+        <TextView
+            android:id="@+id/postDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_of_post"
+            android:layout_toEndOf="@+id/broker_profile_picture"
+            android:textColor="@color/nice_yellow"
+            android:text="Ex. wallstreet pro"
+            android:fontFamily="@font/bebas_regular"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_people_24"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/broker_profile_picture"
+            android:id="@+id/people_icon"
+            app:tint="@color/nice_yellow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/people_icon"
+            android:layout_below="@+id/broker_profile_picture"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/nice_yellow"
+            android:layout_marginLeft="2dp"
+            android:text="clients"
+            android:textSize="15sp"
+            android:fontFamily="@font/bebas_regular"
+            android:id="@+id/clients_text"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_access_time_24"
+            android:layout_toEndOf="@+id/clients_text"
+            android:layout_below="@+id/broker_profile_picture"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"
+            app:tint="@color/nice_yellow"
+            android:id="@+id/time_icon"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/time_icon"
+            android:layout_below="@+id/broker_profile_picture"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="2dp"
+            android:textColor="@color/nice_yellow"
+            android:text="Experience"
+            android:textSize="15sp"
+            android:fontFamily="@font/bebas_regular"
+            android:id="@+id/experience"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/people_icon"
+            android:layout_below="@+id/clients_text"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/nice_red"
+            android:text="32"
+            android:textSize="15sp"
+            android:fontFamily="@font/bebas_regular"
+            android:id="@+id/num_of_clients"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/time_icon"
+            android:layout_below="@+id/clients_text"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/nice_red"
+            android:text="4 years"
+            android:textSize="15sp"
+            android:fontFamily="@font/bebas_regular"
+            android:id="@+id/num_of_experience"/>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="102dp"
+        android:layout_toEndOf="@id/broker_item"
+        android:layout_marginBottom="4dp"
+        app:cardCornerRadius="8dp"
+        android:elevation="10dp"
+        app:cardBackgroundColor="@color/nice_blue"
+        >
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_person_add_24"
+            app:tint="@color/nice_yellow"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

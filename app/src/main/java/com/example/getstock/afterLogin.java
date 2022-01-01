@@ -31,13 +31,13 @@ public class afterLogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = getIntent();
-        userId = intent.getExtras().getString("userId"); //This holds our user id.
-
-        args = new Bundle();
-        args.putString("userId", userId);
-
-        Toast.makeText(afterLogin.this, userId, Toast.LENGTH_LONG).show();
+//        Intent intent = getIntent();
+//        userId = intent.getExtras().getString("userId"); //This holds our user id.
+//
+//        args = new Bundle();
+//        args.putString("userId", userId);
+//
+//        Toast.makeText(afterLogin.this, userId, Toast.LENGTH_LONG).show();
 
         setContentView(R.layout.activity_after_login);
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
@@ -46,57 +46,57 @@ public class afterLogin extends AppCompatActivity {
 
 
         //Search the broker collection for the email.
-        db.collection("Brokers")
-
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            flag = true;
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                Broker test = document.toObject(Broker.class);
-                                if(test.email.equals("sam@gmail.com")){
-                                    flag=true;
-                                    Log.d(TAG, "It's a match!");
-                                    // We have our Broker Instance rdy.
-                                    args.putString("UserType", test.userType);
-                                }
-
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
+//        db.collection("Brokers")
+//
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            flag = true;
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                Log.d(TAG, document.getId() + " => " + document.getData());
+//                                Broker test = document.toObject(Broker.class);
+//                                if(test.email.equals("sam@gmail.com")){
+//                                    flag=true;
+//                                    Log.d(TAG, "It's a match!");
+//                                    // We have our Broker Instance rdy.
+//                                    args.putString("UserType", test.userType);
+//                                }
+//
+//                            }
+//                        } else {
+//                            Log.d(TAG, "Error getting documents: ", task.getException());
+//                        }
+//                    }
+//                });
 
         //SEARCH USERS
         //Search the broker collection for the email.
-        db.collection("Users")
-
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            flag = true;
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                Broker test = document.toObject(Broker.class);
-                                if(test.email.equals("sam@gmail.com")){
-                                    flag=true;
-                                    Log.d(TAG, "It's a match!");
-                                    // We have our Broker Instance rdy.
-                                    args.putString("UserType", test.userType);
-                                }
-
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
+//        db.collection("Users")
+//
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            flag = true;
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                Log.d(TAG, document.getId() + " => " + document.getData());
+//                                Broker test = document.toObject(Broker.class);
+//                                if(test.email.equals("sam@gmail.com")){
+//                                    flag=true;
+//                                    Log.d(TAG, "It's a match!");
+//                                    // We have our Broker Instance rdy.
+//                                    args.putString("UserType", test.userType);
+//                                }
+//
+//                            }
+//                        } else {
+//                            Log.d(TAG, "Error getting documents: ", task.getException());
+//                        }
+//                    }
+//                });
 
     }
 
@@ -124,7 +124,7 @@ public class afterLogin extends AppCompatActivity {
                             break;
                     }
                     //Passing userId to its child.
-                    selectedFragment.setArguments(args);
+//                    selectedFragment.setArguments(args);
 
                     //Set the display
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

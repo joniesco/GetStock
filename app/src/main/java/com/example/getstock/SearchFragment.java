@@ -46,8 +46,6 @@ import yahoofinance.YahooFinance;
  */
 public class SearchFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private SearchView searchView = null;
     private SearchView.OnQueryTextListener queryTextListener;
     private TextView textView;
@@ -108,6 +106,12 @@ public class SearchFragment extends Fragment {
 
         }.execute();
 
+        //Create fragment.
+        Fragment brokerListFragment = new BrokerListFragment();
+
+        //Create the small clients list.
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.broker_list_fragment_container, brokerListFragment).commit();
     }
 
     @Override

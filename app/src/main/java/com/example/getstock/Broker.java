@@ -1,11 +1,8 @@
 package com.example.getstock;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * This class represents a broker that can
@@ -16,7 +13,6 @@ public class Broker implements Serializable {
 
     public Map<String, Double> usersInvesting; // a table containing User Id -> How much money did he give the broker.
     public Map<String, Integer> portfolio; //Symbol - > amount of stocks.
-    public List<String> favoriteStocks;
     public Double initialMoney;
     public Double buyingCommission ;
     public Double sellingCommission ;
@@ -29,7 +25,6 @@ public class Broker implements Serializable {
     public Broker(  String fullName,String age,String email, Double brokerCommission) {
         usersInvesting = new HashMap<String, Double>();
         portfolio = new HashMap<String, Integer>();
-        favoriteStocks = new ArrayList<>();
 
         this.age=age;
         this.fullName = fullName;
@@ -151,11 +146,4 @@ public class Broker implements Serializable {
         return email;
     }
 
-    /**
-     * Get a list of all users.
-     * @return
-     */
-    public Set<String> getUserList(){
-        return usersInvesting.keySet();
-    }
 }

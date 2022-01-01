@@ -7,9 +7,6 @@ import java.util.Map;
 /**
  * This class represents a general user.
  */
-/**
- * This class represents a general user.
- */
 public class User implements Serializable {
 
     public String userType;

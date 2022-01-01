@@ -68,7 +68,7 @@ public class ClientsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-        ((AppCompatActivity) getActivity()).setTitle("Our Brokers");
+
     }
 
     private void fillExampleList() {
