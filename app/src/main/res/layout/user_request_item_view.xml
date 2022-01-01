@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        app:cardCornerRadius="8dp"
+        android:elevation="10dp"
+        android:layout_marginRight="5dp"
+        app:cardBackgroundColor="@color/nice_yellow"
+        android:id="@+id/broker_item">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp">
+
+
+
+            <ImageView
+                android:id="@+id/user_profile_pic"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="2dp"
+                android:src="@drawable/amanda_waller_icon"
+                />
+
+            <TextView
+                android:id="@+id/user_fullname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/user_profile_pic"
+                android:text="Amanda Waller"
+                android:textColor="@color/nice_blue"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/bebas_regular"
+                />
+
+            <TextView
+                android:id="@+id/postDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/user_fullname"
+                android:layout_toEndOf="@+id/user_profile_pic"
+                android:textColor="@color/nice_blue"
+                android:text="Tel-Aviv, Israel"
+                android:fontFamily="@font/bebas_regular"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_money_24"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/user_profile_pic"
+                android:id="@+id/dollar_icon"
+                app:tint="@color/nice_red" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/dollar_icon"
+                android:layout_below="@+id/user_profile_pic"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/nice_red"
+                android:layout_marginLeft="2dp"
+                android:text="amount"
+                android:layout_centerVertical="true"
+                android:textSize="15sp"
+                android:fontFamily="@font/bebas_regular"
+                android:id="@+id/amount"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/dollar_icon"
+                android:layout_below="@+id/amount"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/nice_red"
+                android:text="1000"
+                android:textSize="15sp"
+                android:fontFamily="@font/bebas_regular"
+                android:id="@+id/num_of_clients"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="102dp"
+        android:layout_toEndOf="@id/broker_item"
+        android:layout_marginBottom="4dp"
+        app:cardCornerRadius="8dp"
+        android:elevation="10dp"
+        app:cardBackgroundColor="@color/nice_yellow"
+        android:id="@+id/approve_client">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_check_24"
+                app:tint="@color/nice_blue"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

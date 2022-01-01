@@ -36,7 +36,7 @@ public class BrokerListFragment extends Fragment {
 
         //populate our list.
         fillExampleList();
-        //Make sure we pass a list that is already filtered, i.e. client won't see any brokers that he already has.
+        //Make sure we pass a list that is already filtered, i.e. client won't see any brokers that he already has in his list.
 
 
         // create a recycler view and populate it, with our designed adapter.

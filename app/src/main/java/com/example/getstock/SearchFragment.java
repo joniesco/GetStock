@@ -49,8 +49,10 @@ public class SearchFragment extends Fragment {
     private SearchView searchView = null;
     private SearchView.OnQueryTextListener queryTextListener;
     private TextView textView;
+    private TextView title;
     final String[] s = {""};
     Context ct;
+    int userType = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,7 +61,7 @@ public class SearchFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_search, container, false);
         textView = view.findViewById(R.id.yahoo_stock);
         ct = getContext();
-
+        title = view.findViewById(R.id.head_line);
 
 
 
@@ -106,12 +108,27 @@ public class SearchFragment extends Fragment {
 
         }.execute();
 
-        //Create fragment.
-        Fragment brokerListFragment = new BrokerListFragment();
+        if(userType == 1) {
 
-        //Create the small clients list.
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.broker_list_fragment_container, brokerListFragment).commit();
+            title.setText("Our Brokers");
+
+            //Create fragment.
+            Fragment brokerListFragment = new BrokerListFragment();
+
+            //Create the small clients list.
+            FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+            transaction.replace(R.id.broker_list_fragment_container, brokerListFragment).commit();
+        }
+        else if(userType == 2){
+
+            title.setText("Client Requests");
+            //Create fragment.
+            Fragment userRequestFragment = new UserRequestsFragment();
+
+            //Create the small clients list.
+            FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+            transaction.replace(R.id.broker_list_fragment_container, userRequestFragment).commit();
+        }
     }
 
     @Override
