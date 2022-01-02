@@ -59,6 +59,8 @@ public class brokerFragment extends Fragment {
         name = view.findViewById(R.id.desc);
         numOfNotifications = view.findViewById(R.id.num_of_notifications);
 
+
+        args = new Bundle();
         //Set user settings
         userType = getArguments().getInt("userType");
         if(userType == 1) { //broker

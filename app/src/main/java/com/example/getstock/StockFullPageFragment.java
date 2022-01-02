@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,9 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.Utils;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,11 +51,8 @@ import yahoofinance.YahooFinance;
  */
 public class StockFullPageFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     Button sellStock, buyStock;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     boolean click = true;
 
@@ -63,45 +64,25 @@ public class StockFullPageFragment extends Fragment {
 
     ArrayList<Entry> entryArrayList = new ArrayList<>();
 
+    //Our views.
     TextView symbolName, companyName, stockPrice,changeInPrice, percentChange;
     TextView openingPrice, previousClose, high, low, marketCap, volume, exchange;
+    TextView balance;
+
+    //user logged in settings
+    int userType; //Set user type to display the correct view.
+    Bundle args;
+    User user;
+    Broker broker;
+    String userId;
+
+    String symbol = "INTC";
 
     private String []  stockDetails = new String[11];
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public StockFullPageFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment StockFullPageFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static StockFullPageFragment newInstance(String param1, String param2) {
-        StockFullPageFragment fragment = new StockFullPageFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -153,6 +134,7 @@ public class StockFullPageFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_stock_full_page, container, false);
 
+
         //Bind texts
         symbolName = view.findViewById(R.id.stock_symbol);
         companyName = view.findViewById(R.id.company_name);
@@ -167,28 +149,89 @@ public class StockFullPageFragment extends Fragment {
         marketCap = view.findViewById(R.id.market_cap);
         volume = view.findViewById(R.id.volume);
         exchange = view.findViewById(R.id.exchange);
-
-        //Image
+        balance = view.findViewById(R.id.balance_value);
 
 
         favoritesIcon = view.findViewById(R.id.favorites);
-        favoritesIcon.setOnClickListener(new View.OnClickListener(){
+        userType = getArguments().getInt("userType");
+        userId = getArguments().getString("userId", userId);
+        args = new Bundle();
+        String TAG = "";
+        View.OnClickListener viewClickFavorites;
+        if(userType == 1) { //broker
 
-            @Override
-            public void onClick(View v) {
-                if(click){
-                    favoritesIcon.setColorFilter(R.color.nice_red);
-                    click = false;
-                }
-                else {
-                    favoritesIcon.setColorFilter(R.color.nice_yellow);
-                    click = true;
-                }
+            broker = (Broker) getArguments().getSerializable("broker");
+            balance.setText(broker.getInitialMoney().toString());
 
+            //put args for next fragment.
+            args.putInt("userType", 1);
+            args.putSerializable("broker", broker);
 
+            if(broker.favorites.contains(symbol)){
+                favoritesIcon.setColorFilter(R.color.nice_red);
             }
 
-        });
+            viewClickFavorites = new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(!broker.favorites.contains(symbol)){
+                        broker.favorites.add(symbol);
+                        favoritesIcon.setColorFilter(R.color.nice_red);
+                        db.collection("Brokers").document(userId)
+                                .update("favorites", broker.favorites)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Log.d("", "Added Successfully to favorites");
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.d("", "Failed to add to favorites");
+                            }
+                        });
+                    }
+
+                }
+            };
+        }
+        else { //user
+
+            user = (User) getArguments().getSerializable("user");
+            balance.setText(user.getInitialMoney());
+
+            if(user.favorites.contains(symbol)){
+                favoritesIcon.setColorFilter(R.color.nice_red);
+            }
+            //put args for next fragment.
+            args.putInt("userType", 2);
+            args.putSerializable("user", user);
+            viewClickFavorites = new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(!user.favorites.contains(symbol)){
+                        user.favorites.add(symbol);
+                        favoritesIcon.setColorFilter(R.color.nice_red);
+                        db.collection("Users").document(userId)
+                                .update("favorites", user.favorites)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Log.d("", "Added Successfully to favorites");
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.d("", "Failed to add to favorites");
+                            }
+                        });
+                    }
+                }
+            };
+
+        }
+
+        favoritesIcon.setOnClickListener(viewClickFavorites);
 
         //Setup our Chart.
         lineChartDownFill = view.findViewById(R.id.idLineChart);
@@ -203,12 +246,22 @@ public class StockFullPageFragment extends Fragment {
         lineChartDownFill.getXAxis().setEnabled(false);
         lineChartDownFill.setMaxHighlightDistance(200);
         lineChartDownFill.setViewPortOffsets(0, 0, 0, 0);
+
+        //This function creates our graph, later need to be moved under postExecute method.
         lineChartDownFillWithData();
 
 
         //Bind buttons to button var
         sellStock = view.findViewById(R.id.SellStockButton);
         buyStock = view.findViewById(R.id.BuyStockButton);
+
+        if(userType == 1){
+
+        }
+        else {
+            sellStock.setVisibility(View.INVISIBLE);
+            buyStock.setVisibility(View.INVISIBLE);
+        }
         //Add on click listener
 //        sellStock.setOnClickListener();
 //        buyStock.setOnClickListener();
@@ -218,6 +271,7 @@ public class StockFullPageFragment extends Fragment {
     /**
      * Fill our list with entries (x,y) ,
      * later need to be with actual stock entries.
+     * should first get values from YahooQuotes , Parse it then update here.
      */
     private void fillGraphWithEntries(){
         entryArrayList.add(new Entry(0, 60f, "1"));

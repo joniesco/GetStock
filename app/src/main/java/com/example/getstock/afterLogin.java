@@ -29,23 +29,27 @@ public class afterLogin extends AppCompatActivity {
     Broker broker;
     User user;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
         userType = intent.getExtras().getInt("userType");
+        userId = intent.getExtras().getString("userId");
         args = new Bundle();
 
         if(userType == 1){
             broker = (Broker) intent.getExtras().getSerializable("broker");
             args.putInt("userType", 1);
             args.putSerializable("broker", broker);
+            args.putString("userId", userId);
         }
         else {
             user = (User) intent.getExtras().getSerializable("user");
             args.putInt("userType", 2);
             args.putSerializable("user", user);
+            args.putString("userId", userId);
         }
 
 

@@ -24,6 +24,7 @@ public class Broker implements Serializable {
     public List<String> favorites;
     public Map<String, Double> userRequests;
     public List<String> notifications;
+    public Map<String, Map<String, String>> usersInvestmentFile; //Show where the broker invests each users money.
 
     public Broker(){}
 
@@ -33,6 +34,7 @@ public class Broker implements Serializable {
         favorites = new ArrayList<>();
         userRequests = new HashMap<>();
         notifications = new ArrayList<>();
+        usersInvestmentFile = new HashMap<>();
 
         this.age=age;
         this.fullName = fullName;

@@ -17,6 +17,7 @@ import android.widget.TextView;
  */
 public class ProfileFragment extends Fragment {
 
+    //Our views
     Switch notificationSwitch;
     TextView profileName;
     TextView numOfClients;
@@ -24,6 +25,7 @@ public class ProfileFragment extends Fragment {
     TextView balance;
     TextView clientsOrBrokers;
 
+    //user logged in settings
     User user;
     Broker broker;
     int userType;
@@ -50,6 +52,7 @@ public class ProfileFragment extends Fragment {
 
         //Setup user / broker instance
         userType = getArguments().getInt("userType");
+
         if(userType == 1){ //broker
             broker = (Broker) getArguments().getSerializable("broker");
             profileName.setText(broker.getFullName());

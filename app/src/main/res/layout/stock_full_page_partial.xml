@@ -82,17 +82,18 @@
                 android:textStyle="bold"
                 android:fontFamily="@font/bebas_regular"
                 />
+
             <TextView
+                android:id="@+id/balance_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/balance_value"
                 android:layout_below="@id/balance_title"
-                android:text="2,249"
                 android:layout_marginLeft="5dp"
                 android:layout_toEndOf="@id/balance"
+                android:fontFamily="@font/bebas_regular"
+                android:text="2,249"
                 android:textColor="@color/teal_700"
-                android:textStyle="bold"
-                android:fontFamily="@font/bebas_regular"/>
+                android:textStyle="bold" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView

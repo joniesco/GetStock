@@ -39,11 +39,7 @@ import eu.verdelhan.ta4j.Rule;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#} factory method to
- * create an instance of this fragment.
- */
+
 public class SearchFragment extends Fragment {
 
     private SearchView searchView = null;
@@ -52,8 +48,13 @@ public class SearchFragment extends Fragment {
     private TextView title;
     final String[] s = {""};
     Context ct;
-    int userType; //Set user type to display the correct view.
 
+    //user logged in settings
+    int userType; //Set user type to display the correct view.
+    Bundle args;
+    User user;
+    Broker broker;
+    String userId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,7 +73,35 @@ public class SearchFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+        userType = getArguments().getInt("userType");
+        userId = getArguments().getString("userId");
+        args = new Bundle();
+
+        if(userType == 1) { //broker
+
+            broker = (Broker) getArguments().getSerializable("broker");
+
+            //put args for next fragment.
+            args.putInt("userType", 1);
+            args.putSerializable("broker", broker);
+
+        }
+        else { //user
+
+            user = (User) getArguments().getSerializable("user");
+
+            //put args for next fragment.
+            args.putInt("userType", 2);
+            args.putSerializable("user", user);
+
+        }
+
+        args.putString("userId", userId);
         Fragment stockFullPage = new StockFullPageFragment();
+        stockFullPage.setArguments(args);
+
         textView.setOnClickListener(new View.OnClickListener(){
 
         @Override
