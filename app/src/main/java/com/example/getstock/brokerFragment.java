@@ -26,39 +26,66 @@ import com.google.firebase.firestore.QuerySnapshot;
  *
  */
 public class brokerFragment extends Fragment {
-    //Init page elements
+    //Init page elements.
     TextView name;
+    TextView numOfNotifications;
     ImageView profilePic;
+
+    //Will store data to pass to next fragment.
     Bundle args;
 
     //Get our DB instance.
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    //user logged in related data.
+    int userType;
+    User user;
+    Broker broker;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((AppCompatActivity) getActivity()).setTitle("Portfolio");
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        //get args from previous page.
-//        args = this.getArguments();
-//        String email = args.getString("userId");
-//        String userType = args.getString("UserType");
-
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_broker, container, false);
         profilePic = view.findViewById(R.id.profile_pic);
         name = view.findViewById(R.id.desc);
+        numOfNotifications = view.findViewById(R.id.num_of_notifications);
 
-        //Change profile pic according to user logged in.
-//        if(userType.equals("Broker")){
-//            profilePic.setImageResource(R.drawable.business_man2);
-//        }
+        //Set user settings
+        userType = getArguments().getInt("userType");
+        if(userType == 1) { //broker
+
+            broker = (Broker) getArguments().getSerializable("broker");
+
+            //put args for next fragment.
+            args.putInt("userType", 1);
+            args.putSerializable("broker", broker);
+
+            //Change text in page.
+            name.setText(broker.getFullName());
+            numOfNotifications.setText("You've got " + broker.notifications.size() + " notifications!");
+        }
+        else { //user
+
+            user = (User) getArguments().getSerializable("user");
+
+            //put args for next fragment.
+            args.putInt("userType", 2);
+            args.putSerializable("user", user);
+
+            //Change text in page.
+            name.setText(user.getFullName());
+            numOfNotifications.setText("You've got " + user.notifications.size() + " notifications!");
+        }
+
         return view;
     }
 
@@ -70,43 +97,9 @@ public class brokerFragment extends Fragment {
         Fragment clientsFragment = new ClientsFragment();
         Fragment stocksFragment = new StocksFragment();
 
-        //Create the bundle to pass to next page.
-        Bundle userData = new Bundle();
-        userData.putString("user", "data");
-        String TAG = "";
-
-        //users email
-        String email = "stam@stam";
-
-
-
-        //CREATE
-        db.collection("Brokers")
-
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                Broker test = document.toObject(Broker.class);
-                                if(test.email.equals("sam@gmail.com")){
-                                    Log.d(TAG, "It's a match!");
-                                    // We have our Broker Instance rdy.
-                                    name.setText(test.fullName);
-                                }
-
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-
         //Transfer user data to clients fragment and stocks fragment.
-        clientsFragment.setArguments(userData);
-        stocksFragment.setArguments(userData);
+        clientsFragment.setArguments(args);
+        stocksFragment.setArguments(args);
 
         //Create the small clients list.
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();

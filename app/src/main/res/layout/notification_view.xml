@@ -36,7 +36,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
-                    android:id="@+id/greeting"
+                    android:id="@+id/num_of_notifications"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -54,7 +54,7 @@
                     android:id="@+id/desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/greeting"
+                    android:layout_below="@+id/num_of_notifications"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="10dp"
                     android:layout_toEndOf="@+id/notification_icon"

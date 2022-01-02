@@ -1,7 +1,9 @@
 package com.example.getstock;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,6 +18,8 @@ public class User implements Serializable {
 
     public String initialMoney ; //The initial money the user starts with.
     public Map<String, Double> brokerMap  ; //Will use to hold all our brokers, and amount invested.
+    public List<String> favorites;
+    public List<String> notifications;
 
     public User(){
 //        brokerMap = new HashMap<>();
@@ -28,6 +32,9 @@ public class User implements Serializable {
         this.userType = userType;
         this.initialMoney = Dollar;
         this.brokerMap = brokerMap;
+        favorites = new ArrayList<>();
+        notifications = new ArrayList<>();
+
     }
 
     public String getUserType() {

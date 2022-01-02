@@ -26,18 +26,28 @@ public class afterLogin extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     int userType;
     boolean flag = false;
+    Broker broker;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        Intent intent = getIntent();
-//        userId = intent.getExtras().getString("userId"); //This holds our user id.
-//
-//        args = new Bundle();
-//        args.putString("userId", userId);
-//
-//        Toast.makeText(afterLogin.this, userId, Toast.LENGTH_LONG).show();
+        Intent intent = getIntent();
+        userType = intent.getExtras().getInt("userType");
+        args = new Bundle();
+
+        if(userType == 1){
+            broker = (Broker) intent.getExtras().getSerializable("broker");
+            args.putInt("userType", 1);
+            args.putSerializable("broker", broker);
+        }
+        else {
+            user = (User) intent.getExtras().getSerializable("user");
+            args.putInt("userType", 2);
+            args.putSerializable("user", user);
+        }
+
 
         setContentView(R.layout.activity_after_login);
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
@@ -124,7 +134,7 @@ public class afterLogin extends AppCompatActivity {
                             break;
                     }
                     //Passing userId to its child.
-//                    selectedFragment.setArguments(args);
+                    selectedFragment.setArguments(args);
 
                     //Set the display
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

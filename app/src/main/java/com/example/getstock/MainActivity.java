@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     Broker broker = document.toObject(Broker.class);
                                     Intent intent = new Intent(MainActivity.this,afterLogin.class) ;
                                     intent.putExtra("broker", broker);
-
+                                    intent.putExtra("userType", 1);
                                     Toast.makeText(MainActivity.this,"welcome broker "+ broker.getFullName(),Toast.LENGTH_LONG)
                                             .show();
                                     startActivity(intent);
@@ -157,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     User user = document.toObject(User.class);
                                     Intent intent = new Intent(MainActivity.this,afterLogin.class) ;
                                     intent.putExtra("user", user);
+                                    intent.putExtra("userType", 2);
                                     Toast.makeText(MainActivity.this,"welcome user "+ user.getFullName(),Toast.LENGTH_LONG)
                                             .show();
                                     startActivity(intent);

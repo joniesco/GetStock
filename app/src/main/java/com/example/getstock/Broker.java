@@ -1,7 +1,9 @@
 package com.example.getstock;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,12 +21,18 @@ public class Broker implements Serializable {
     public String userType ;
     public Double brokerCommission;
     public String fullName,age,email;
+    public List<String> favorites;
+    public Map<String, Double> userRequests;
+    public List<String> notifications;
 
     public Broker(){}
 
     public Broker(  String fullName,String age,String email, Double brokerCommission) {
         usersInvesting = new HashMap<String, Double>();
         portfolio = new HashMap<String, Integer>();
+        favorites = new ArrayList<>();
+        userRequests = new HashMap<>();
+        notifications = new ArrayList<>();
 
         this.age=age;
         this.fullName = fullName;

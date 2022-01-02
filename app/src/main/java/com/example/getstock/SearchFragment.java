@@ -52,7 +52,8 @@ public class SearchFragment extends Fragment {
     private TextView title;
     final String[] s = {""};
     Context ct;
-    int userType = 1;
+    int userType; //Set user type to display the correct view.
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -108,7 +109,7 @@ public class SearchFragment extends Fragment {
 
         }.execute();
 
-        if(userType == 1) {
+        if(userType == 2) {
 
             title.setText("Our Brokers");
 
@@ -119,7 +120,7 @@ public class SearchFragment extends Fragment {
             FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
             transaction.replace(R.id.broker_list_fragment_container, brokerListFragment).commit();
         }
-        else if(userType == 2){
+        else if(userType == 1){
 
             title.setText("Client Requests");
             //Create fragment.
@@ -136,6 +137,8 @@ public class SearchFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         ((AppCompatActivity) getActivity()).setTitle("Search stock symbol");
+
+        userType = getArguments().getInt("userType");
 
     }
 
