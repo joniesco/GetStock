@@ -2,6 +2,7 @@ package com.example.getstock;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,24 +16,34 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BrokerListAdapter extends RecyclerView.Adapter<BrokerListAdapter.BrokerListViewHolder> implements Filterable {
-
+    private List<String> brokerIdList;
     private List<Broker> brokerList;
     private List<Broker> brokerListFull;
     Context ct;
     Fragment ft;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    User user;
+    String userId;
 
-
-    BrokerListAdapter(List<Broker> brokerList, Context ct, Fragment ft) {
+    BrokerListAdapter(List<Broker> brokerList, Context ct, Fragment ft, User user, List<String> brokerIdList, String userId) {
+        this.userId = userId;
         this.brokerList = brokerList;
         brokerListFull = new ArrayList<>(brokerList);
         this.ct = ct;
         this.ft = ft;
+        this.user = user;
+        this.brokerIdList = brokerIdList;
     }
 
     @Override
@@ -158,11 +169,27 @@ public class BrokerListAdapter extends RecyclerView.Adapter<BrokerListAdapter.Br
             public void onClick(View v) {
 
                 //Get text from input
-                String input = holder.inputBox.getText().toString();
+                String amount = holder.inputBox.getText().toString();
 
                 //Check if user has enough money
                 //need to implement method in user class ( also convert input to double ).
+                if(user.isTransactionOkay(Double.parseDouble(amount))){
+                    broker.userRequests.put(userId, Double.parseDouble(amount));
+                    db.collection("Brokers").document(brokerIdList.get(holder.getAdapterPosition()))
+                            .update("userRequests", broker.userRequests)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    notifyDataSetChanged();
+                                    holder.addPerson.setVisibility(View.INVISIBLE);
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
 
+                        }
+                    });
+                }
 
                 //add to user to broker with amount of money.
                 //Should be a DB call here or call a local instance of broker and send the instance.
@@ -178,4 +205,9 @@ public class BrokerListAdapter extends RecyclerView.Adapter<BrokerListAdapter.Br
     public int getItemCount() {
         return brokerList.size();
     }
+
+//    public void updateUser(){
+//        db.collection("Users").document(userId)
+//                .update()
+//    }
 }

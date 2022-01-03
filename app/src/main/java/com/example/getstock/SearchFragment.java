@@ -144,6 +144,7 @@ public class SearchFragment extends Fragment {
 
             //Create fragment.
             Fragment brokerListFragment = new BrokerListFragment();
+            brokerListFragment.setArguments(args);
 
             //Create the small clients list.
             FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
@@ -154,6 +155,7 @@ public class SearchFragment extends Fragment {
             title.setText("Client Requests");
             //Create fragment.
             Fragment userRequestFragment = new UserRequestsFragment();
+            userRequestFragment.setArguments(args);
 
             //Create the small clients list.
             FragmentTransaction transaction = getChildFragmentManager().beginTransaction();

@@ -155,5 +155,8 @@ public class Broker implements Serializable {
     public String getEmail() {
         return email;
     }
-
+    public void acceptClient(String clientId){
+        userRequests.remove(clientId);
+        usersInvestmentFile.put(clientId, new HashMap<>());
+    }
 }

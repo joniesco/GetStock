@@ -89,7 +89,7 @@
                 android:text="1000"
                 android:textSize="15sp"
                 android:fontFamily="@font/bebas_regular"
-                android:id="@+id/num_of_clients"/>
+                android:id="@+id/amount_sent"/>
 
         </RelativeLayout>
 

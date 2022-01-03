@@ -1,5 +1,7 @@
 package com.example.getstock;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,5 +61,15 @@ public class User implements Serializable {
 
     public Map<String, Double> getBrokerMap() {
         return brokerMap;
+    }
+
+    @NonNull
+    public boolean isTransactionOkay(double money){
+        double userMoney = Double.parseDouble(initialMoney);
+        if(money > 0 && (userMoney - money >= 0)){
+            initialMoney = ""+ (userMoney - money);
+            return true;
+        }
+        return false;
     }
 }

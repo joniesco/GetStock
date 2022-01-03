@@ -16,24 +16,36 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class UserRequestAdapter extends RecyclerView.Adapter<UserRequestAdapter.UserRequestViewHolder> implements Filterable {
 
     private List<User> userRequestList;
     private List<User> userRequestListFull;
+    private List<String> userIds;
     Context ct;
     Fragment ft;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    Broker broker;
+    String brokerId;
 
 
-    UserRequestAdapter(List<User> userRequestList, Context ct, Fragment ft) {
+    UserRequestAdapter(List<User> userRequestList, Context ct, Fragment ft, Broker broker, List<String> userIds, String brokerId) {
         this.userRequestList = userRequestList;
         userRequestListFull = new ArrayList<>(userRequestList);
         this.ct = ct;
         this.ft = ft;
+        this.broker = broker;
+        this.userIds = userIds;
+        this.brokerId = brokerId;
     }
 
     @Override
@@ -93,7 +105,7 @@ public class UserRequestAdapter extends RecyclerView.Adapter<UserRequestAdapter.
             //Bind to xml items.
             approvePerson = itemView.findViewById(R.id.approve_client);
             clientName = itemView.findViewById(R.id.user_fullname);
-            amount = itemView.findViewById(R.id.amount);
+            amount = itemView.findViewById(R.id.amount_sent);
             userProfilePic = itemView.findViewById(R.id.user_profile_pic);
         }
     }
@@ -110,15 +122,9 @@ public class UserRequestAdapter extends RecyclerView.Adapter<UserRequestAdapter.
     public void onBindViewHolder(@NonNull UserRequestAdapter.UserRequestViewHolder holder, int position) {
 
 //        //Set our details
-//        User user = userRequestList.get(position);
-//        holder.brokerName.setText(user.getFullName());
-//        holder.commision.setText(user.getBrokerCommission().toString());
-//        if(broker.usersInvesting.keySet().size() == 0 || broker.usersInvesting.keySet() == null) {
-//            holder.numOfClients.setText("0");
-//        }
-//        else {
-//            holder.numOfClients.setText(broker.usersInvesting.keySet().size());
-//        }
+        User user = userRequestList.get(position);
+        holder.clientName.setText(user.getFullName());
+        holder.amount.setText(broker.userRequests.get(userIds.get(holder.getAdapterPosition())).toString());
 
 
 
@@ -128,11 +134,54 @@ public class UserRequestAdapter extends RecyclerView.Adapter<UserRequestAdapter.
         bundle.putString("message", "From Activity"); //Attach the new fragment an instance of broker to show.
         showPost.setArguments(bundle);
 
+        holder.approvePerson.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                broker.acceptClient(userIds.get(holder.getAdapterPosition()));
+                db.collection("Brokers").document(brokerId)
+                        .set(broker).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        user.brokerMap.put(brokerId, 1.0);
+                        holder.approvePerson.setVisibility(View.INVISIBLE);
+                        addBrokerToUser(userIds.get(holder.getAdapterPosition()), user);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+
+            }
+        });
 
     }
 
     @Override
     public int getItemCount() {
         return userRequestList.size();
+    }
+
+    /**
+     * replaces our user instance, with a new instance.
+     * Calls our Database.
+     * @param uid
+     * @param user
+     */
+    public void addBrokerToUser(String uid, User user){
+        db.collection("Users").document(uid)
+                .set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
     }
 }
