@@ -68,6 +68,7 @@ dependencies {
     implementation 'com.yahoofinance-api:YahooFinanceAPI:3.15.0'
     implementation 'com.google.firebase:firebase-firestore'
     implementation platform('com.google.firebase:firebase-bom:29.0.0')
+    implementation 'com.google.firebase:firebase-storage:20.0.0'
 //    implementation files('libs\\YahooFinanceAPI-3.15.0-javadoc.jar')
 //    implementation files('libs\\YahooFinanceAPI-3.15.0-sources.jar')
     testImplementation 'junit:junit:4.+'
@@ -76,6 +77,8 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'eu.verdelhan:ta4j:0.8'
     implementation 'org.ta4j:ta4j-examples:0.14'
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 
 //    implementation group: 'com.yahoofinance-api', name: 'YahooFinanceAPI', version: 'x.y.z'
