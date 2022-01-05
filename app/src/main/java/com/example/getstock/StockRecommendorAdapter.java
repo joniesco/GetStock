@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,11 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
 
@@ -33,55 +39,23 @@ import java.util.List;
  * This is an adapter used in our home screen
  * contains a list of brokers (Widgets).
  */
-public class StockRecommendorAdapter extends RecyclerView.Adapter<StockRecommendorAdapter.StockRecommendorViewHolder> implements Filterable {
+public class StockRecommendorAdapter extends RecyclerView.Adapter<StockRecommendorAdapter.StockRecommendorViewHolder> {
 
-    private List<Broker> stockList;
-    private List<Broker> stockListFull;
+    private List<String> stockList;
+    private List<String> stockListFull;
     Context ct;
     Fragment ft;
 
-    StockRecommendorAdapter(List<Broker> stockList, Context ct, Fragment ft) {
+    //Get our DB instance.
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    StockRecommendorAdapter(List<String> stockList, Context ct, Fragment ft) {
         this.stockList = stockList;
         stockListFull = new ArrayList<>(stockList);
         this.ct = ct;
         this.ft = ft;
     }
 
-    @Override
-    public Filter getFilter() {
-        return stockFilter;
-    }
-
-    private Filter stockFilter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            List<Broker> filteredList = new ArrayList<>();
-
-            if (constraint == null || constraint.length() == 0) {
-                filteredList.addAll(stockListFull);
-            } else {
-                String filterPattern = constraint.toString().toLowerCase().trim();
-
-                for (Broker item : stockListFull) {
-                    if (item.getFullName().toLowerCase().contains(filterPattern)) {
-                        filteredList.add(item);
-                    }
-                }
-            }
-
-            FilterResults results = new FilterResults();
-            results.values = filteredList;
-
-            return results;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            stockList.clear();
-            stockList.addAll((List) results.values);
-            notifyDataSetChanged();
-        }
-    };
 
     class StockRecommendorViewHolder extends RecyclerView.ViewHolder {
         TextView postDescription;
@@ -111,8 +85,23 @@ public class StockRecommendorAdapter extends RecyclerView.Adapter<StockRecommend
 
     @Override
     public void onBindViewHolder(@NonNull StockRecommendorAdapter.StockRecommendorViewHolder holder, int position) {
-        Broker userpost = stockList.get(position);
-
+        String userId = stockList.get(position);
+        Log.d("", userId + " user");
+        db.collection("Users").document(userId)
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                User user = (User) documentSnapshot.toObject(User.class);
+                Log.d("", "user" + user.toString());
+                holder.PostTitle.setText(user.getFullName());
+                holder.postDescription.setText(user.getEmail());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("", "failed");
+            }
+        });
         //Create pie chart
         holder.pieChart.addPieSlice(
                 new PieModel(

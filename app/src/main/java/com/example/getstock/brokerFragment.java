@@ -29,6 +29,7 @@ public class brokerFragment extends Fragment {
     //Init page elements.
     TextView name;
     TextView numOfNotifications;
+    TextView myClientsAndBrokers;
     ImageView profilePic;
 
     //Will store data to pass to next fragment.
@@ -58,7 +59,7 @@ public class brokerFragment extends Fragment {
         profilePic = view.findViewById(R.id.profile_pic);
         name = view.findViewById(R.id.desc);
         numOfNotifications = view.findViewById(R.id.num_of_notifications);
-
+        myClientsAndBrokers = view.findViewById(R.id.myClients);
 
         args = new Bundle();
         //Set user settings
@@ -78,7 +79,7 @@ public class brokerFragment extends Fragment {
         else { //user
 
             user = (User) getArguments().getSerializable("user");
-
+            myClientsAndBrokers.setText("My Brokers");
             //put args for next fragment.
             args.putInt("userType", 2);
             args.putSerializable("user", user);
