@@ -24,7 +24,8 @@ public class Broker implements Serializable {
     public List<String> favorites;
     public Map<String, Double> userRequests;
     public List<String> notifications;
-    public Map<String, Map<String, String>> usersInvestmentFile; //Show where the broker invests each users money.
+    public Map<String, Map<String, String>> usersInvestmentFile;//Show where the broker invests each users money.
+    public Map<String, String> IdsToNames;
 
     public Broker(){}
 
@@ -35,6 +36,7 @@ public class Broker implements Serializable {
         userRequests = new HashMap<>();
         notifications = new ArrayList<>();
         usersInvestmentFile = new HashMap<>();
+        IdsToNames = new HashMap<>();
 
         this.age=age;
         this.fullName = fullName;
@@ -47,6 +49,26 @@ public class Broker implements Serializable {
         this.brokerCommission = brokerCommission;
     }
 
+    @Override
+    public String toString() {
+        return "Broker{" +
+                "usersInvesting=" + usersInvesting +
+                ", portfolio=" + portfolio +
+                ", initialMoney=" + initialMoney +
+                ", buyingCommission=" + buyingCommission +
+                ", sellingCommission=" + sellingCommission +
+                ", userType='" + userType + '\'' +
+                ", brokerCommission=" + brokerCommission +
+                ", fullName='" + fullName + '\'' +
+                ", age='" + age + '\'' +
+                ", email='" + email + '\'' +
+                ", favorites=" + favorites +
+                ", userRequests=" + userRequests +
+                ", notifications=" + notifications +
+                ", usersInvestmentFile=" + usersInvestmentFile +
+                ", IdsToNames=" + IdsToNames +
+                '}';
+    }
 
     /**
      * Add a new user to our portfolio, with given amount.
@@ -66,19 +88,25 @@ public class Broker implements Serializable {
      * @param quantity
      * @param stockPrice
      */
-    public void BuyStock(String Symbol, int quantity, double stockPrice){
+    public void BuyStock(String Symbol, int quantity, double stockPrice, String clientId){
         double buyStockWithCommission = stockPrice *quantity*buyingCommission;
         if(buyStockWithCommission > initialMoney){
-            System.out.println("Insufficient funds");
+//            System.out.println("Insufficient funds");
         }
         else {
 
-            if (portfolio.get(Symbol) == null) {
-                System.out.println("Added a new stock");
-                portfolio.put(Symbol, quantity);
+            if (usersInvestmentFile.get(clientId) == null) {
+//                System.out.println("Added a new stock");
+                Map<String, String> symbols = new HashMap<>();
+                symbols.put(Symbol,Double.toString(stockPrice*quantity));
+                usersInvestmentFile.put(clientId, symbols);
             } else {
-                System.out.println("Add to existing stock");
-                portfolio.put(Symbol, quantity);
+//                System.out.println("Add to existing stock");
+                Map<String, String> symbols = usersInvestmentFile.get(clientId);
+                Double currentPrice = Double.parseDouble(symbols.get(Symbol));
+                currentPrice += buyStockWithCommission;
+                symbols.put(Symbol, Double.toString(currentPrice));
+
             }
         }
         initialMoney -= buyStockWithCommission;
@@ -90,19 +118,24 @@ public class Broker implements Serializable {
      * @param quantity
      * @param stockPrice
      */
-    public void sellStock(String Symbol, int quantity, double stockPrice){
+    public void sellStock(String Symbol, int quantity, double stockPrice, String clientId){
         double sellStockWithCommission = stockPrice *quantity*sellingCommission;
 
-        if(portfolio.get(Symbol)==null){
+        if(portfolio.get(Symbol)!=null){
             System.out.println("No such stock exists");
-        }
-        if(portfolio.get(Symbol) < quantity){
-            System.out.println("Not enough stocks to sell");
+
+            if(portfolio.get(Symbol) < quantity){
+                System.out.println("Not enough stocks to sell");
+            }
+            else {
+                int initialQuantity = portfolio.get(Symbol);
+                portfolio.put(Symbol,initialQuantity  + quantity );
+                initialMoney += sellStockWithCommission;
+            }
+
         }
 
-        int initialQuantity = portfolio.get(Symbol);
-        portfolio.put(Symbol,initialQuantity  + quantity );
-        initialMoney += sellStockWithCommission;
+
     }
 
     /**
@@ -155,8 +188,29 @@ public class Broker implements Serializable {
     public String getEmail() {
         return email;
     }
-    public void acceptClient(String clientId){
+
+    /**
+     * Accept new client.
+     * @param clientId
+     * @param clientEmail
+     */
+    public void acceptClient(String clientId, String clientEmail){
         userRequests.remove(clientId);
         usersInvestmentFile.put(clientId, new HashMap<>());
+        IdsToNames.put(clientId, clientId);
+    }
+
+    /**
+     * Get client id.
+     * @param clientEmail
+     * @return
+     */
+    public String clientMailToId(String clientEmail){
+        for(String s: IdsToNames.keySet()){
+            if(s.equals(clientEmail)){
+                return s;
+            }
+        }
+        return null;
     }
 }

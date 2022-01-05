@@ -19,8 +19,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -38,10 +40,16 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.Utils;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
@@ -53,6 +61,7 @@ public class StockFullPageFragment extends Fragment {
 
     Button sellStock, buyStock;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     boolean click = true;
 
@@ -68,6 +77,11 @@ public class StockFullPageFragment extends Fragment {
     TextView symbolName, companyName, stockPrice,changeInPrice, percentChange;
     TextView openingPrice, previousClose, high, low, marketCap, volume, exchange;
     TextView balance;
+
+    //our sell stock and buy stock views
+    ImageView increaseBuyStock, decreaseBuyStock, increaseSellStock, decreaseSellStock;
+    TextView inputBuy, inputSell;
+    Spinner spinner;
 
     //user logged in settings
     int userType; //Set user type to display the correct view.
@@ -152,6 +166,21 @@ public class StockFullPageFragment extends Fragment {
         volume = view.findViewById(R.id.volume);
         exchange = view.findViewById(R.id.exchange);
         balance = view.findViewById(R.id.balance_value);
+
+        //Bind our selling and buying
+        increaseBuyStock = view.findViewById(R.id.up_arrow_buy);
+        decreaseBuyStock = view.findViewById(R.id.down_arrow_buy);
+        increaseSellStock = view.findViewById(R.id.up_arrow_sell);
+        decreaseSellStock = view.findViewById(R.id.down_arrow_sell);
+        inputBuy = view.findViewById(R.id.input_buy);
+        inputSell = view.findViewById(R.id.input_sell);
+        spinner = view.findViewById(R.id.spinner);
+
+        //put our click listeners
+        increaseBuyStock.setOnClickListener(addStockBuyListener);
+        increaseSellStock.setOnClickListener(addStockSellListener);
+        decreaseSellStock.setOnClickListener(subStockSellListener);
+        decreaseBuyStock.setOnClickListener(subStockBuyListener);
 
 
         favoritesIcon = view.findViewById(R.id.favorites);
@@ -257,6 +286,8 @@ public class StockFullPageFragment extends Fragment {
         sellStock = view.findViewById(R.id.SellStockButton);
         buyStock = view.findViewById(R.id.BuyStockButton);
 
+        updateBrokerInstance();
+
         if(userType == 1){
 
         }
@@ -269,6 +300,131 @@ public class StockFullPageFragment extends Fragment {
 //        buyStock.setOnClickListener();
         return view;
     }
+
+    /**
+     *  Update our Broker instance.
+     */
+    public void updateBrokerInstance(){
+        db.collection("Brokers").document(mAuth.getUid())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                broker = documentSnapshot.toObject(Broker.class);
+                List<String> names = new ArrayList<>();
+
+                for(String s:broker.IdsToNames.keySet()){
+                    names.add(broker.IdsToNames.get(s));
+                }
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, names);
+                spinner.setAdapter(adapter);
+
+                buyStock.setOnClickListener(pressBuy);
+                sellStock.setOnClickListener(pressSell);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+    }
+
+    public void updateBroker(){
+        db.collection("Brokers").document(mAuth.getUid())
+                .set(broker)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d("", "Success");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("", "Failed");
+            }
+        });
+    }
+
+    //Buy stock on Click event.
+    View.OnClickListener pressBuy = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            String clientMail = spinner.getSelectedItem().toString();
+            String clientId = broker.clientMailToId(clientMail);
+
+            int amountOfStocks = Integer.parseInt(inputBuy.getText().toString());
+            double price = Double.parseDouble(stockPrice.getText().toString());
+            String symbol = symbolName.getText().toString();
+
+            broker.BuyStock(symbol, amountOfStocks, price, clientId);
+
+            Log.d("",broker.toString());
+        }
+    };
+
+    //Sell stock on Click event.
+    View.OnClickListener pressSell = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            String clientMail = spinner.getSelectedItem().toString();
+            String clientId = broker.clientMailToId(clientMail);
+
+            int amountOfStocks = Integer.parseInt(inputSell.getText().toString());
+            double price = Double.parseDouble(stockPrice.getText().toString());
+            String symbol = symbolName.getText().toString();
+
+            broker.sellStock(symbol, amountOfStocks, price, clientId);
+
+            Log.d("",broker.toString());
+        }
+    };
+
+    //Our listeners
+    View.OnClickListener addStockBuyListener = new View.OnClickListener () {
+
+        @Override
+        public void onClick(View view) {
+            int getInput = Integer.parseInt(inputBuy.getText().toString());
+            getInput++;
+            inputBuy.setText(Integer.toString(getInput));
+            inputSell.setText("0");
+        }
+    };
+    View.OnClickListener subStockBuyListener = new View.OnClickListener () {
+
+        @Override
+        public void onClick(View view) {
+            int getInput = Integer.parseInt(inputBuy.getText().toString());
+            inputSell.setText("0");
+            if(getInput>0){
+                getInput--;
+                inputBuy.setText(Integer.toString(getInput));
+            }
+        }
+    };
+    View.OnClickListener addStockSellListener = new View.OnClickListener () {
+
+        @Override
+        public void onClick(View view) {
+            inputBuy.setText("0");
+            int getInput = Integer.parseInt(inputSell.getText().toString());
+            getInput++;
+            inputSell.setText(Integer.toString(getInput));
+        }
+    };
+    View.OnClickListener subStockSellListener = new View.OnClickListener () {
+
+        @Override
+        public void onClick(View view) {
+            inputBuy.setText("0");
+            int getInput = Integer.parseInt(inputSell.getText().toString());
+            if(getInput>0){
+                getInput--;
+                inputSell.setText(Integer.toString(getInput));
+            }
+
+        }
+    };
 
     /**
      * Fill our list with entries (x,y) ,

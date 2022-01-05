@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="8dp"
+    android:elevation="10dp"
+    app:cardBackgroundColor="@color/grey_900"
+    >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="2dp">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_upward"
+            android:id="@+id/up_arrow_buy"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_centerVertical="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/input_buy"
+            android:textColor="@color/nice_yellow"
+            android:textSize="20dp"
+            android:layout_toEndOf="@id/up_arrow_buy"
+            android:text="0"
+            android:layout_centerVertical="true"
+
+            android:layout_marginRight="5dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/bebas_regular"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_downward"
+            android:layout_toEndOf="@id/input_buy"
+            android:layout_centerVertical="true"
+            android:id="@+id/down_arrow_buy"
+            android:layout_marginRight="5dp"/>
+
+
+
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow_upward"
+            android:id="@+id/up_arrow_sell"
+            android:layout_toEndOf="@id/down_arrow_buy"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="5dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/input_sell"
+            android:textColor="@color/nice_yellow"
+            android:textStyle="bold"
+            android:fontFamily="@font/bebas_regular"
+            android:textSize="20dp"
+            android:layout_toEndOf="@id/up_arrow_sell"
+            android:text="0"
+            android:layout_centerVertical="true"
+
+            android:layout_marginRight="5dp"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_downward"
+            android:layout_toEndOf="@id/input_sell"
+            android:id="@+id/down_arrow_sell"
+            android:layout_marginRight="5dp"
+            android:layout_centerVertical="true"/>
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/down_arrow_buy"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+
+            />
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

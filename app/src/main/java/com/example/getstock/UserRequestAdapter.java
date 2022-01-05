@@ -138,7 +138,10 @@ public class UserRequestAdapter extends RecyclerView.Adapter<UserRequestAdapter.
             @Override
             public void onClick(View view) {
 
-                broker.acceptClient(userIds.get(holder.getAdapterPosition()));
+                //Insert id to our broker.
+                broker.acceptClient(userIds.get(holder.getAdapterPosition()), user.getEmail());
+
+                //
                 db.collection("Brokers").document(brokerId)
                         .set(broker).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

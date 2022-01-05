@@ -2,6 +2,7 @@ package com.example.getstock;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,17 +27,22 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import yahoofinance.Stock;
+import yahoofinance.YahooFinance;
+
 public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockAdapterViewHolder> implements Filterable {
 
-    private List<UserPost> stockList;
-    private List<UserPost> stockListFull;
+    private List<String> stockList;
+    private List<String> stockListFull;
     Context ct;
     Fragment ft;
+    Stock myStock;
 
-    StockAdapter(List<UserPost> stockList, Context ct, Fragment ft) {
+    StockAdapter(List<String> stockList, Context ct, Fragment ft) {
         this.stockList = stockList;
         stockListFull = new ArrayList<>(stockList);
         this.ct = ct;
@@ -51,15 +57,15 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockAdapter
     private Filter stockFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<UserPost> filteredList = new ArrayList<>();
+            List<String> filteredList = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
                 filteredList.addAll(stockListFull);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (UserPost item : stockListFull) {
-                    if (item.getDesc().toLowerCase().contains(filterPattern)) {
+                for (String item : stockListFull) {
+                    if (item.toLowerCase().contains(filterPattern)) {
                         filteredList.add(item);
                     }
                 }
@@ -105,6 +111,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockAdapter
             profilePicture = itemView.findViewById(R.id.profile_picture);
             cardView = itemView.findViewById(R.id.click_post);
             pieChart = itemView.findViewById(R.id.piechart);
+
 
             // initializing variable for bar chart.
             barChart = itemView.findViewById(R.id.idBarChart);
@@ -173,12 +180,26 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockAdapter
 
     @Override
     public void onBindViewHolder(@NonNull StockAdapter.StockAdapterViewHolder holder, int position) {
-        UserPost userpost = stockList.get(position);
+        String userpost = stockList.get(position);
+        holder.PostTitle.setText(userpost);
 
-//        holder.PostTitle.setText(userpost.getPostTitle());
-//        holder.postDescription.setText(userpost.getDesc());
-//        holder.profilePicture.setImageResource(R.drawable.ic_accessibility);
-//        holder.profilePicture.setColorFilter(Color.parseColor("#519259"));
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected void onPostExecute(Void unused) {
+                holder.postDescription.setText(myStock.getName());
+            }
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                try {
+                    myStock = YahooFinance.get(userpost);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+        }.execute();
 
         //Create our fragment to show broker
         Fragment showPost = new showPostFragment();

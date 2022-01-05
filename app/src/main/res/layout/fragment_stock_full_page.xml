@@ -26,7 +26,7 @@
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/idLineChart"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="120dp"
             android:layout_margin="5dp"/>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
@@ -200,24 +200,27 @@
                     android:textStyle="bold"
                     android:fontFamily="@font/bebas_regular"/>
             </TableRow>
+
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp">
                 <Button
                     android:text="Buy Stock"
-                    android:id="@+id/SellStockButton"
+                    android:id="@+id/BuyStockButton"
                     android:textColor="@color/teal_700"
                     android:layout_marginLeft="10dp"
                     android:color="@color/grey_700"/>
                 <Button
                     android:text="Sell Stock"
-                    android:id="@+id/BuyStockButton"
+                    android:id="@+id/SellStockButton"
                     android:textColor="@color/teal_700"
                     android:color="@color/grey_700"
                     android:layout_marginLeft="50dp"/>
             </TableRow>
         </TableLayout>
         </androidx.cardview.widget.CardView>
+        <include layout="@layout/buy_sell_stocks"
+            />
     </LinearLayout>
 </FrameLayout>
