@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -50,6 +51,7 @@ public class ProfileFragment extends Fragment {
     TextView notifications;
     TextView balance;
     TextView clientsOrBrokers;
+    CardView notificationButton;
 
     ImageView profileImage;
     ImageButton changePicture;
@@ -92,7 +94,7 @@ public class ProfileFragment extends Fragment {
         clientsOrBrokers = view.findViewById(R.id.clients);
         balance = view.findViewById(R.id.balance);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBarProfile);
-
+        notificationButton = view.findViewById(R.id.notification_button);
         //image
         profileImage =view.findViewById(R.id.businessIcon);
         changePicture = view.findViewById(R.id.add_photo);
@@ -127,7 +129,25 @@ public class ProfileFragment extends Fragment {
                 numOfClients.setText(broker.getUsersInvesting().keySet().size());
             }
             balance.setText(broker.getInitialMoney().toString());
-            notifications.setText("0");
+            //Notifications
+            notifications.setText(Integer.toString(broker.getUserRequests().size()));
+            notificationButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Fragment userRequestFragment = new UserRequestsFragment();
+                    Bundle args = new Bundle();
+                    args.putInt("userType", 1);
+                    args.putSerializable("broker", broker);
+                    args.putString("brokerId", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    userRequestFragment.setArguments(args);
+
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            userRequestFragment).commit();
+                }
+            });
+
+
+
 
             // profile details
             fullname = (EditText) view.findViewById(R.id.full_name_box);

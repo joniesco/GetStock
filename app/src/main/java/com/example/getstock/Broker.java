@@ -138,6 +138,10 @@ public class Broker implements Serializable {
 
     }
 
+    public Map<String, Double> getUserRequests() {
+        return userRequests;
+    }
+
     /**
      * Return a user their money + after commission.
      * @return
