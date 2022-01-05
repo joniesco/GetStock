@@ -217,16 +217,5 @@ public class SearchFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
     }
-    //    private void fillExampleList() {
-//        stockList = new ArrayList<>();
-//        stockList.add(new Stock("AAA", "One", "Ten"));
-//        stockList.add(new Stock("APL", "Two", "Eleven"));
-//        stockList.add(new Stock("BBB", "Three", "Twelve"));
-//        stockList.add(new Stock("APA", "Four", "Thirteen"));
-//        stockList.add(new Stock("APA", "Five", "Fourteen"));
-//        stockList.add(new Stock("APA", "Six", "Fifteen"));
-//        stockList.add(new Stock("APA", "Seven", "Sixteen"));
-//        stockList.add(new Stock("APA", "Eight", "Seventeen"));
-//        stockList.add(new Stock("APA", "Nine", "Eighteen"));
-//    }
+
 

@@ -30,17 +30,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This is an adapter used in our broker screen
+ * This is an adapter used in our home screen
  * contains a list of brokers (Widgets).
  */
 public class StockRecommendorAdapter extends RecyclerView.Adapter<StockRecommendorAdapter.StockRecommendorViewHolder> implements Filterable {
 
-    private List<UserPost> stockList;
-    private List<UserPost> stockListFull;
+    private List<Broker> stockList;
+    private List<Broker> stockListFull;
     Context ct;
     Fragment ft;
 
-    StockRecommendorAdapter(List<UserPost> stockList, Context ct, Fragment ft) {
+    StockRecommendorAdapter(List<Broker> stockList, Context ct, Fragment ft) {
         this.stockList = stockList;
         stockListFull = new ArrayList<>(stockList);
         this.ct = ct;
@@ -55,15 +55,15 @@ public class StockRecommendorAdapter extends RecyclerView.Adapter<StockRecommend
     private Filter stockFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<UserPost> filteredList = new ArrayList<>();
+            List<Broker> filteredList = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
                 filteredList.addAll(stockListFull);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (UserPost item : stockListFull) {
-                    if (item.getDesc().toLowerCase().contains(filterPattern)) {
+                for (Broker item : stockListFull) {
+                    if (item.getFullName().toLowerCase().contains(filterPattern)) {
                         filteredList.add(item);
                     }
                 }
@@ -111,7 +111,7 @@ public class StockRecommendorAdapter extends RecyclerView.Adapter<StockRecommend
 
     @Override
     public void onBindViewHolder(@NonNull StockRecommendorAdapter.StockRecommendorViewHolder holder, int position) {
-        UserPost userpost = stockList.get(position);
+        Broker userpost = stockList.get(position);
 
         //Create pie chart
         holder.pieChart.addPieSlice(
@@ -136,38 +136,6 @@ public class StockRecommendorAdapter extends RecyclerView.Adapter<StockRecommend
                         Integer.parseInt(Integer.toString(25)),
                         Color.parseColor("#29B6F6")));
         holder.pieChart.setBackgroundColor(ct.getResources().getColor(R.color.nice_yellow));
-
-//        holder.PostTitle.setText(userpost.getPostTitle());
-//        holder.postDescription.setText(userpost.getDesc());
-//        holder.profilePicture.setImageResource(R.drawable.ic_accessibility);
-//        holder.profilePicture.setColorFilter(Color.parseColor("#519259"));
-
-        //Create our fragment to show broker
-        Fragment showPost = new showPostFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("message", "From Activity"); //Attach the new fragment an instance of broker to show.
-        showPost.setArguments(bundle);
-
-//        holder.cardView.setOnClickListener(new View.OnClickListener() {
-//            /**
-//             * Define an what happens when you click a widget.
-//             *
-//             * @param v
-//             */
-//            @Override
-//            public void onClick(View v) {
-//
-//                FragmentManager fragmentManager = ((FragmentActivity) ct).getSupportFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.fragment_container, showPost);
-//                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
-////                Intent intent = new Intent(ct, widgetClick.class);
-////                intent.putExtra("Code", "asd");
-////                ct.startActivity(intent);
-//            }
-//
-//        });
 
     }
 

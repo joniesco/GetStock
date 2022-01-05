@@ -286,9 +286,11 @@ public class StockFullPageFragment extends Fragment {
         sellStock = view.findViewById(R.id.SellStockButton);
         buyStock = view.findViewById(R.id.BuyStockButton);
 
-        updateBrokerInstance();
+
+
 
         if(userType == 1){
+            updateBrokerInstance();
 
         }
         else {
@@ -311,7 +313,7 @@ public class StockFullPageFragment extends Fragment {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 broker = documentSnapshot.toObject(Broker.class);
                 List<String> names = new ArrayList<>();
-
+                Log.d("", broker.toString());
                 for(String s:broker.IdsToNames.keySet()){
                     names.add(broker.IdsToNames.get(s));
                 }

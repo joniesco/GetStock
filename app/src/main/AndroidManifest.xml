@@ -24,16 +24,6 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".widgetClick"
-            android:exported="false"
-            android:parentActivityName=".SearchResult" />
-        <activity
-            android:name=".SearchResult"
-            android:exported="false" />
-        <activity
-            android:name=".ProfileActivity"
-            android:exported="false" />
-        <activity
             android:name=".Register"
             android:exported="false" />
         <activity

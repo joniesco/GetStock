@@ -128,11 +128,11 @@ public class UserRequestAdapter extends RecyclerView.Adapter<UserRequestAdapter.
 
 
 
-        //Create our fragment to show broker
-        Fragment showPost = new showPostFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("message", "From Activity"); //Attach the new fragment an instance of broker to show.
-        showPost.setArguments(bundle);
+//        //Create our fragment to show broker
+//        Fragment showPost = new showPostFragment();
+//        Bundle bundle = new Bundle();
+//        bundle.putString("message", "From Activity"); //Attach the new fragment an instance of broker to show.
+//        showPost.setArguments(bundle);
 
         holder.approvePerson.setOnClickListener(new View.OnClickListener() {
             @Override

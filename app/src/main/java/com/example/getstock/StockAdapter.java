@@ -34,6 +34,9 @@ import java.util.List;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 
+/**
+ * Show favorite stocks.
+ */
 public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockAdapterViewHolder> implements Filterable {
 
     private List<String> stockList;
@@ -200,33 +203,6 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockAdapter
             }
 
         }.execute();
-
-        //Create our fragment to show broker
-        Fragment showPost = new showPostFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("message", "From Activity"); //Attach the new fragment an instance of broker to show.
-        showPost.setArguments(bundle);
-
-//        holder.cardView.setOnClickListener(new View.OnClickListener() {
-//            /**
-//             * Define an what happens when you click a widget.
-//             *
-//             * @param v
-//             */
-//            @Override
-//            public void onClick(View v) {
-//
-//                FragmentManager fragmentManager = ((FragmentActivity) ct).getSupportFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.fragment_container, showPost);
-//                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
-////                Intent intent = new Intent(ct, widgetClick.class);
-////                intent.putExtra("Code", "asd");
-////                ct.startActivity(intent);
-//            }
-//
-//        });
 
     }
 

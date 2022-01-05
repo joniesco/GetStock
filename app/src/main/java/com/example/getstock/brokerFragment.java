@@ -23,7 +23,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 /**
- *
+ * Home Broker page
  */
 public class brokerFragment extends Fragment {
     //Init page elements.

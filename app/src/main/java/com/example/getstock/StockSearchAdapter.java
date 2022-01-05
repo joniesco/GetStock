@@ -136,9 +136,6 @@ public class StockSearchAdapter extends RecyclerView.Adapter<StockSearchAdapter.
                 fragmentTransaction.replace(R.id.fragment_container, showPost);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-//                Intent intent = new Intent(ct, widgetClick.class);
-//                intent.putExtra("Code", "asd");
-//                ct.startActivity(intent);
             }
 
         });

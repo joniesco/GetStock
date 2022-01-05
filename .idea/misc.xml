@@ -3,6 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/activity_after_login.xml" value="0.24954710144927536" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/activity_main.xml" value="0.24954710144927536" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/activity_widget_click.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/broker_item_list_view.xml" value="0.24954710144927536" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/client_widget.xml" value="0.24954710144927536" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/fragment_broker.xml" value="0.24954710144927536" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/fragment_favo.xml" value="0.24954710144927536" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/fragment_home.xml" value="0.24954710144927536" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/fragment_profile.xml" value="0.3150684931506849" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/fragment_search.xml" value="0.24954710144927536" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/home_layout.xml" value="0.24954710144927536" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/home_layout1.xml" value="0.24954710144927536" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/profile_details.xml" value="0.5558912386706949" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/search_item_stock_recommend.xml" value="0.4" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/show_stats.xml" value="0.24954710144927536" />
         <entry key="..\:/Users/danda/Documents/Final_project/GetStock/app/src/main/res/drawable/ic_message.xml" value="0.1125" />
         <entry key="..\:/Users/danda/Documents/Final_project/GetStock/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/danda/Documents/Final_project/GetStock/app/src/main/res/layout/activity_profile.xml" value="0.25" />
@@ -71,16 +86,6 @@
         <entry key="..\:/Users/danda/Documents/Stocks/GetStock/app/src/main/res/menu/menu_main.xml" value="0.1" />
         <entry key="..\:/Users/danda/Documents/Stocks/GetStock/app/src/main/res/menu/options_menu.xml" value="0.33" />
         <entry key="..\:/Users/danda/Documents/Stocks/GetStock/app/src/main/res/xml/searchable.xml" value="0.1213768115942029" />
-        <entry key="..\:/Users/jonie/Desktop/GetStock-GetStockv2/GetStock/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/jonie/Desktop/GetStock-GetStockv2/GetStock/app/src/main/res/layout/fragment_client.xml" value="0.234375" />
-        <entry key="..\:/Users/jonie/Desktop/GetStock-GetStockv2/GetStock/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
-        <entry key="..\:/Users/jonie/Desktop/GetStock-GetStockv2/GetStock/app/src/main/res/layout/fragment_user_requests.xml" value="0.234375" />
-        <entry key="..\:/Users/jonie/Desktop/GetStock-GetStockv2/GetStock/app/src/main/res/layout/home_layout.xml" value="0.25" />
-        <entry key="..\:/Users/jonie/Desktop/GetStock-GetStockv2/GetStock/app/src/main/res/layout/home_layout1.xml" value="0.25" />
-        <entry key="..\:/Users/jonie/Desktop/GetStock-GetStockv2/GetStock/app/src/main/res/layout/profile_details.xml" value="0.19322916666666667" />
-        <entry key="..\:/Users/jonie/Desktop/GetStock-GetStockv2/GetStock/app/src/main/res/layout/search_item.xml" value="0.25" />
-        <entry key="..\:/Users/jonie/Desktop/GetStock-GetStockv2/GetStock/app/src/main/res/layout/show_stats.xml" value="0.25" />
-        <entry key="..\:/Users/jonie/Desktop/GetStock-GetStockv2/GetStock/app/src/main/res/layout/user_request_item_view.xml" value="0.234375" />
         <entry key="..\:/Users/jonie/Desktop/GetStock/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/jonie/Desktop/GetStock/app/src/main/res/layout/activity_profile.xml" value="0.264" />
         <entry key="..\:/Users/jonie/Desktop/GetStock/app/src/main/res/layout/activity_register.xml" value="0.25416666666666665" />

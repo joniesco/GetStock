@@ -21,6 +21,7 @@ import com.google.firebase.firestore.QuerySnapshot;
  * This is a screen shown after a successful login process.
  */
 public class afterLogin extends AppCompatActivity {
+
     String userId;
     Bundle args;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();

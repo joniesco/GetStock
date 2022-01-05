@@ -130,20 +130,13 @@ public class BrokerListAdapter extends RecyclerView.Adapter<BrokerListAdapter.Br
         Broker broker = brokerList.get(position);
         holder.brokerName.setText(broker.getFullName());
         holder.commision.setText(broker.getBrokerCommission().toString());
+
         if(broker.usersInvesting.keySet().size() == 0 || broker.usersInvesting.keySet() == null) {
             holder.numOfClients.setText("0");
         }
         else {
             holder.numOfClients.setText(broker.usersInvesting.keySet().size());
         }
-
-
-
-        //Create our fragment to show broker
-        Fragment showPost = new showPostFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("message", "From Activity"); //Attach the new fragment an instance of broker to show.
-        showPost.setArguments(bundle);
 
         //Define what happens on the Add person icon
         holder.addPerson.setOnClickListener(new View.OnClickListener() {
@@ -208,8 +201,4 @@ public class BrokerListAdapter extends RecyclerView.Adapter<BrokerListAdapter.Br
         return brokerList.size();
     }
 
-//    public void updateUser(){
-//        db.collection("Users").document(userId)
-//                .update()
-//    }
 }

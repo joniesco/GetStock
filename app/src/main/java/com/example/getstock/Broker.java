@@ -207,7 +207,7 @@ public class Broker implements Serializable {
     public void acceptClient(String clientId, String clientEmail){
         userRequests.remove(clientId);
         usersInvestmentFile.put(clientId, new HashMap<>());
-        IdsToNames.put(clientId, clientId);
+        IdsToNames.put(clientId, clientEmail);
     }
 
     /**

@@ -26,7 +26,7 @@ import java.util.List;
 public class ClientsFragment extends Fragment {
 
     private RecyclerView recommendRecyclerView; //Will hold our widgets.
-    private List<UserPost> postList; //a random list that currently populates the page.
+    private List<Broker> postList; //a random list that currently populates the page.
     private List<Broker> clientList; //The actual list that will populate the page.
     private FloatingActionButton floatingActionButton; //floating + button.
     private CardView cardView;
@@ -51,16 +51,6 @@ public class ClientsFragment extends Fragment {
         recommendRecyclerView.setLayoutManager(llm);
         recommendRecyclerView.setAdapter(new StockRecommendorAdapter(postList,view.getContext(),this));
 
-        //Set up the floating button.
-//        floatingActionButton = view.findViewById(R.id.addPost);
-//        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                postList.add(new UserPost("David Blaine", "One", "Ten"));
-//                recommendRecyclerView.setAdapter(new StockRecommendorAdapter(postList,view.getContext(), homeFragment));
-//            }
-//        });
-
         return view;
     }
 
@@ -73,15 +63,15 @@ public class ClientsFragment extends Fragment {
 
     private void fillExampleList() {
         postList = new ArrayList<>();
-        postList.add(new UserPost("David Blaine", "One", "Ten"));
-        postList.add(new UserPost("Archie22", "Two", "Eleven"));
-        postList.add(new UserPost("Ben jake", "Three", "Twelve"));
-        postList.add(new UserPost("guitarHERO", "Four", "Thirteen"));
-        postList.add(new UserPost("broker ben", "Five", "Fourteen"));
-        postList.add(new UserPost("candytimes jhon", "Six", "Fifteen"));
-        postList.add(new UserPost("test", "Seven", "Sixteen"));
-        postList.add(new UserPost("test", "Eight", "Seventeen"));
-        postList.add(new UserPost("test", "Nine", "Eighteen"));
+        postList.add(new Broker("David Blaine", "One", "Ten", 0.5));
+        postList.add(new Broker("Archie22", "Two", "Eleven", 0.5));
+        postList.add(new Broker("Ben jake", "Three", "Twelve", 0.5));
+        postList.add(new Broker("guitarHERO", "Four", "Thirteen", 0.5));
+        postList.add(new Broker("broker ben", "Five", "Fourteen", 0.5));
+        postList.add(new Broker("candytimes jhon", "Six", "Fifteen", 0.5));
+        postList.add(new Broker("test", "Seven", "Sixteen", 0.5));
+        postList.add(new Broker("test", "Eight", "Seventeen", 0.5));
+        postList.add(new Broker("test", "Nine", "Eighteen", 0.5));
     }
 
     /**
