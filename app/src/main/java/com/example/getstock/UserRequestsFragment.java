@@ -79,6 +79,7 @@ public class UserRequestsFragment extends Fragment {
 
         return view;
     }
+
     private void fillExampleList() {
         userList = new ArrayList<>();
 

@@ -174,7 +174,9 @@ public class BrokerListAdapter extends RecyclerView.Adapter<BrokerListAdapter.Br
                 //Check if user has enough money
                 //need to implement method in user class ( also convert input to double ).
                 if(user.isTransactionOkay(Double.parseDouble(amount))){
+
                     broker.userRequests.put(userId, Double.parseDouble(amount));
+
                     db.collection("Brokers").document(brokerIdList.get(holder.getAdapterPosition()))
                             .update("userRequests", broker.userRequests)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {

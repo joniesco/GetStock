@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -50,6 +51,8 @@ public class ProfileFragment extends Fragment {
     TextView notifications;
     TextView balance;
     TextView clientsOrBrokers;
+    CardView notificationsButton;
+
 
     ImageView profileImage;
     ImageButton changePicture;
@@ -92,6 +95,8 @@ public class ProfileFragment extends Fragment {
         clientsOrBrokers = view.findViewById(R.id.clients);
         balance = view.findViewById(R.id.balance);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBarProfile);
+
+        notificationsButton = view.findViewById(R.id.notifications_button);
 
         //image
         profileImage =view.findViewById(R.id.businessIcon);
@@ -211,7 +216,7 @@ public class ProfileFragment extends Fragment {
                 numOfClients.setText(Integer.toString(user.getBrokerMap().keySet().size()));
             }
             balance.setText(user.getInitialMoney());
-            notifications.setText("0");
+            notifications.setText(Integer.toString(user.notifications.size()));
 
         }
 

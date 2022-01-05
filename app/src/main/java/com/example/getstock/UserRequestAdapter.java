@@ -149,6 +149,10 @@ public class UserRequestAdapter extends RecyclerView.Adapter<UserRequestAdapter.
                         user.brokerMap.put(brokerId, 1.0);
                         holder.approvePerson.setVisibility(View.INVISIBLE);
                         addBrokerToUser(userIds.get(holder.getAdapterPosition()), user);
+
+                        user.notifications.add("Broker "+ broker.getFullName()+ " has added you");
+
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -156,6 +160,8 @@ public class UserRequestAdapter extends RecyclerView.Adapter<UserRequestAdapter.
 
                     }
                 });
+
+
 
             }
         });

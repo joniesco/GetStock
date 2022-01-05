@@ -21,6 +21,7 @@ public class User implements Serializable {
     public String initialMoney ; //The initial money the user starts with.
     public Map<String, Double> brokerMap  ; //Will use to hold all our brokers, and amount invested.
     public List<String> favorites;
+
     public List<String> notifications;
 
     public User(){

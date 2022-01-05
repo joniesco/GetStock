@@ -1,5 +1,7 @@
 package com.example.getstock;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -96,16 +98,20 @@ public class Broker implements Serializable {
         else {
 
             if (usersInvestmentFile.get(clientId) == null) {
-//                System.out.println("Added a new stock");
                 Map<String, String> symbols = new HashMap<>();
                 symbols.put(Symbol,Double.toString(stockPrice*quantity));
                 usersInvestmentFile.put(clientId, symbols);
             } else {
 //                System.out.println("Add to existing stock");
                 Map<String, String> symbols = usersInvestmentFile.get(clientId);
-                Double currentPrice = Double.parseDouble(symbols.get(Symbol));
-                currentPrice += buyStockWithCommission;
-                symbols.put(Symbol, Double.toString(currentPrice));
+                if(symbols.get(Symbol) == null ) {
+                    symbols.put(Symbol, Double.toString(buyStockWithCommission));
+                }
+                else {
+                    Double currentPrice = Double.parseDouble(symbols.get(Symbol));
+                    currentPrice += buyStockWithCommission;
+                    symbols.put(Symbol, Double.toString(currentPrice));
+                }
 
             }
         }
@@ -119,7 +125,7 @@ public class Broker implements Serializable {
      * @param stockPrice
      */
     public void sellStock(String Symbol, int quantity, double stockPrice, String clientId){
-        double sellStockWithCommission = stockPrice *quantity*sellingCommission;
+        double sellStockWithCommission = stockPrice * quantity * sellingCommission;
 
         if(portfolio.get(Symbol)!=null){
             System.out.println("No such stock exists");
@@ -206,8 +212,9 @@ public class Broker implements Serializable {
      * @return
      */
     public String clientMailToId(String clientEmail){
+        Log.d("", IdsToNames + "");
         for(String s: IdsToNames.keySet()){
-            if(s.equals(clientEmail)){
+            if(IdsToNames.get(s).equals(clientEmail)){
                 return s;
             }
         }

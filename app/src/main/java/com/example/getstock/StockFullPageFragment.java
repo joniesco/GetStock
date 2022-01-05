@@ -356,9 +356,10 @@ public class StockFullPageFragment extends Fragment {
             double price = Double.parseDouble(stockPrice.getText().toString());
             String symbol = symbolName.getText().toString();
 
+            Log.d("", clientId + "");
             broker.BuyStock(symbol, amountOfStocks, price, clientId);
+            updateBroker();
 
-            Log.d("",broker.toString());
         }
     };
 
