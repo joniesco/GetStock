@@ -104,7 +104,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/notifications_button"
+            android:id="@+id/notification_button"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             app:cardCornerRadius="8dp"

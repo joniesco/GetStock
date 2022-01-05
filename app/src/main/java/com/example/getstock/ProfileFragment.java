@@ -51,8 +51,8 @@ public class ProfileFragment extends Fragment {
     TextView notifications;
     TextView balance;
     TextView clientsOrBrokers;
-    CardView notificationsButton;
 
+    CardView notificationButton;
 
     ImageView profileImage;
     ImageButton changePicture;
@@ -96,7 +96,7 @@ public class ProfileFragment extends Fragment {
         balance = view.findViewById(R.id.balance);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBarProfile);
 
-        notificationsButton = view.findViewById(R.id.notifications_button);
+        notificationButton = view.findViewById(R.id.notification_button);
 
         //image
         profileImage =view.findViewById(R.id.businessIcon);
@@ -132,7 +132,25 @@ public class ProfileFragment extends Fragment {
                 numOfClients.setText(broker.getUsersInvesting().keySet().size());
             }
             balance.setText(broker.getInitialMoney().toString());
-            notifications.setText("0");
+            //Notifications
+            notifications.setText(Integer.toString(broker.getUserRequests().size()));
+            notificationButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Fragment userRequestFragment = new UserRequestsFragment();
+                    Bundle args = new Bundle();
+                    args.putInt("userType", 1);
+                    args.putSerializable("broker", broker);
+                    args.putString("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    userRequestFragment.setArguments(args);
+
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            userRequestFragment).commit();
+                }
+            });
+
+
+
 
             // profile details
             fullname = (EditText) view.findViewById(R.id.full_name_box);
