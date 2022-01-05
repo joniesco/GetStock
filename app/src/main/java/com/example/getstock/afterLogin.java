@@ -140,6 +140,7 @@ public class afterLogin extends AppCompatActivity {
                     //Passing userId to its child.
                     selectedFragment.setArguments(args);
 
+
                     //Set the display
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             selectedFragment).commit();

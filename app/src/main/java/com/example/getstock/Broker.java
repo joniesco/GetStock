@@ -155,6 +155,63 @@ public class Broker implements Serializable {
     public String getEmail() {
         return email;
     }
+
+    public void setUsersInvesting(Map<String, Double> usersInvesting) {
+        this.usersInvesting = usersInvesting;
+    }
+
+    public void setPortfolio(Map<String, Integer> portfolio) {
+        this.portfolio = portfolio;
+    }
+
+    public void setInitialMoney(Double initialMoney) {
+        this.initialMoney = initialMoney;
+    }
+
+    public void setBuyingCommission(Double buyingCommission) {
+        this.buyingCommission = buyingCommission;
+    }
+
+    public void setSellingCommission(Double sellingCommission) {
+        this.sellingCommission = sellingCommission;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    public void setBrokerCommission(Double brokerCommission) {
+        this.brokerCommission = brokerCommission;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setFavorites(List<String> favorites) {
+        this.favorites = favorites;
+    }
+
+    public void setUserRequests(Map<String, Double> userRequests) {
+        this.userRequests = userRequests;
+    }
+
+    public void setNotifications(List<String> notifications) {
+        this.notifications = notifications;
+    }
+
+    public void setUsersInvestmentFile(Map<String, Map<String, String>> usersInvestmentFile) {
+        this.usersInvestmentFile = usersInvestmentFile;
+    }
+
     public void acceptClient(String clientId){
         userRequests.remove(clientId);
         usersInvestmentFile.put(clientId, new HashMap<>());
