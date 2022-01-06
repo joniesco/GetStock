@@ -37,6 +37,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 /**
  *
@@ -54,10 +56,14 @@ public class ProfileFragment extends Fragment {
 
     CardView notificationButton;
 
-    ImageView profileImage;
+    CircleImageView profileImage;
     ImageButton changePicture;
     StorageReference storageReference;
     FirebaseAuth fAuth;
+
+    //text view for user
+    TextView userBrokerCommission , userBuyCom, userSellCom;
+
 
     //for profile details
     EditText fullname;
@@ -107,7 +113,7 @@ public class ProfileFragment extends Fragment {
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).into(profileImage);
+                Picasso.get().load(uri).noFade().into(profileImage);
             }
 
         }).addOnFailureListener(new OnFailureListener() {
@@ -117,6 +123,12 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        // profile details
+        fullname = (EditText) view.findViewById(R.id.full_name_box);
+        buyingCommission = (EditText) view.findViewById(R.id.buyComBox);
+        sellingCommission = (EditText) view.findViewById(R.id.sellComBox);
+        brokerCommission = (EditText) view.findViewById(R.id.commission);
+        updateDetails = (Button)view.findViewById(R.id.button);
 
         //Setup user / broker instance
         userType = getArguments().getInt("userType");
@@ -127,7 +139,8 @@ public class ProfileFragment extends Fragment {
             // set status params
             broker = (Broker) getArguments().getSerializable("broker");
             profileName.setText(broker.getFullName());
-            numOfClients.setText("0");
+            numOfClients.setText(Integer.toString(broker.IdsToNames.size()));
+
             if(broker.getUsersInvesting().keySet()!=null && broker.getUsersInvesting().keySet().size()!=0) {
                 numOfClients.setText(broker.getUsersInvesting().keySet().size());
             }
@@ -148,17 +161,7 @@ public class ProfileFragment extends Fragment {
                             userRequestFragment).commit();
                 }
             });
-
-
-
-
-            // profile details
-            fullname = (EditText) view.findViewById(R.id.full_name_box);
-            buyingCommission = (EditText) view.findViewById(R.id.buyComBox);
-            sellingCommission = (EditText) view.findViewById(R.id.sellComBox);
-            brokerCommission = (EditText) view.findViewById(R.id.commission);
-            updateDetails = (Button)view.findViewById(R.id.button);
-
+            //profile details
             fullname.setText(broker.getFullName());
             buyingCommission.setText(broker.getBuyingCommission().toString());
             sellingCommission.setText(broker.getSellingCommission().toString());
@@ -229,12 +232,23 @@ public class ProfileFragment extends Fragment {
             user = (User)  getArguments().getSerializable("user");
             profileName.setText(user.getFullName());
             clientsOrBrokers.setText("Brokers");
-            numOfClients.setText("0");
+            numOfClients.setText(Integer.toString(user.getBrokerMap().keySet().size()));
+
             if(user.getBrokerMap().keySet() != null && user.getBrokerMap().keySet().size() != 0) {
                 numOfClients.setText(Integer.toString(user.getBrokerMap().keySet().size()));
             }
             balance.setText(user.getInitialMoney());
             notifications.setText(Integer.toString(user.notifications.size()));
+
+
+            //profile details
+            userBrokerCommission = view.findViewById(R.id.broker_com_box);
+            userBuyCom = view.findViewById(R.id.buyComText);
+            userSellCom = view.findViewById(R.id.sellComText);
+
+            userBrokerCommission.setText("Deposit Money");
+            userBuyCom.setText("Age");
+            userSellCom.setText("Email");
 
         }
 

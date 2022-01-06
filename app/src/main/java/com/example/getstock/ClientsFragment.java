@@ -54,7 +54,7 @@ public class ClientsFragment extends Fragment {
     int userType;
     User user;
     Broker broker;
-    StockRecommendorAdapter stockRecommendorAdapter;
+    ClientWidgetAdapter stockRecommendorAdapter;
 
     Context ct = getContext();
     @Override
@@ -74,7 +74,7 @@ public class ClientsFragment extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(view.getContext());
         llm.setOrientation(RecyclerView.HORIZONTAL);
         recommendRecyclerView.setLayoutManager(llm);
-        stockRecommendorAdapter = new StockRecommendorAdapter(postList,view.getContext(),this);
+        stockRecommendorAdapter = new ClientWidgetAdapter(postList,view.getContext(),this);
         recommendRecyclerView.setAdapter(stockRecommendorAdapter);
         args = new Bundle();
         //Set user settings
@@ -86,6 +86,8 @@ public class ClientsFragment extends Fragment {
             //put args for next fragment.
             args.putInt("userType", 1);
             args.putSerializable("broker", broker);
+
+            //update client list
             updateBroker();
         }
         else { //user
@@ -132,7 +134,9 @@ public class ClientsFragment extends Fragment {
                 postList = new ArrayList<>(broker.IdsToNames.keySet());
                 Log.d("", ""+postList.size() + "this");
                 stockRecommendorAdapter.notifyDataSetChanged();
-                stockRecommendorAdapter = new StockRecommendorAdapter(postList,getContext(),getTargetFragment());
+
+                //StockRecommendorAdapter is list of Clients
+                stockRecommendorAdapter = new ClientWidgetAdapter(postList,getContext(),getTargetFragment());
                 recommendRecyclerView.setAdapter(stockRecommendorAdapter);
             }
         }).addOnFailureListener(new OnFailureListener() {

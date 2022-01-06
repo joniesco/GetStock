@@ -139,6 +139,7 @@ public class UserRequestAdapter extends RecyclerView.Adapter<UserRequestAdapter.
             public void onClick(View view) {
 
                 //Insert id to our broker.
+
                 broker.acceptClient(userIds.get(holder.getAdapterPosition()), user.getEmail());
 
                 //

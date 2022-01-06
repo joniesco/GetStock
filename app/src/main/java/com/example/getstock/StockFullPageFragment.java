@@ -360,6 +360,7 @@ public class StockFullPageFragment extends Fragment {
 
             Log.d("", clientId + "");
             broker.BuyStock(symbol, amountOfStocks, price, clientId);
+
             updateBroker();
 
         }

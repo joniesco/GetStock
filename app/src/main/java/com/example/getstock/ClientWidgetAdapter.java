@@ -37,9 +37,9 @@ import java.util.List;
 
 /**
  * This is an adapter used in our home screen
- * contains a list of brokers (Widgets).
+ * contains a list of clients (Widgets).
  */
-public class StockRecommendorAdapter extends RecyclerView.Adapter<StockRecommendorAdapter.StockRecommendorViewHolder> {
+public class ClientWidgetAdapter extends RecyclerView.Adapter<ClientWidgetAdapter.ClientWidgetViewHolder> {
 
     private List<String> stockList;
     private List<String> stockListFull;
@@ -49,7 +49,7 @@ public class StockRecommendorAdapter extends RecyclerView.Adapter<StockRecommend
     //Get our DB instance.
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    StockRecommendorAdapter(List<String> stockList, Context ct, Fragment ft) {
+    ClientWidgetAdapter(List<String> stockList, Context ct, Fragment ft) {
         this.stockList = stockList;
         stockListFull = new ArrayList<>(stockList);
         this.ct = ct;
@@ -57,14 +57,14 @@ public class StockRecommendorAdapter extends RecyclerView.Adapter<StockRecommend
     }
 
 
-    class StockRecommendorViewHolder extends RecyclerView.ViewHolder {
+    class ClientWidgetViewHolder extends RecyclerView.ViewHolder {
         TextView postDescription;
         TextView PostTitle;
         ImageView profilePicture;
         CardView cardView;
         PieChart pieChart;
 
-        StockRecommendorViewHolder(View itemView) {
+        ClientWidgetViewHolder(View itemView) {
             super(itemView);
             postDescription = itemView.findViewById(R.id.postDescription);
             PostTitle = itemView.findViewById(R.id.title_of_post);
@@ -77,14 +77,14 @@ public class StockRecommendorAdapter extends RecyclerView.Adapter<StockRecommend
 
     @NonNull
     @Override
-    public StockRecommendorAdapter.StockRecommendorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ClientWidgetAdapter.ClientWidgetViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_item_stock_recommend,
                 parent, false);
-        return new StockRecommendorAdapter.StockRecommendorViewHolder(v);
+        return new ClientWidgetAdapter.ClientWidgetViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StockRecommendorAdapter.StockRecommendorViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ClientWidgetAdapter.ClientWidgetViewHolder holder, int position) {
         String userId = stockList.get(position);
         Log.d("", userId + " user");
         db.collection("Users").document(userId)
@@ -126,6 +126,13 @@ public class StockRecommendorAdapter extends RecyclerView.Adapter<StockRecommend
                         Color.parseColor("#29B6F6")));
         holder.pieChart.setBackgroundColor(ct.getResources().getColor(R.color.nice_yellow));
 
+
+//        holder.cardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
     }
 
     @Override

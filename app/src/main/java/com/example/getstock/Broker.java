@@ -26,7 +26,7 @@ public class Broker implements Serializable {
     public List<String> favorites;
     public Map<String, Double> userRequests;
     public List<String> notifications;
-    public Map<String, Map<String, String>> usersInvestmentFile;//Show where the broker invests each users money.
+    public Map<String, ClientPortofolio> usersInvestmentFile;//Show where the broker invests each users money.
     public Map<String, String> IdsToNames;
 
     public Broker(){}
@@ -91,31 +91,18 @@ public class Broker implements Serializable {
      * @param stockPrice
      */
     public void BuyStock(String Symbol, int quantity, double stockPrice, String clientId){
-        double buyStockWithCommission = stockPrice *quantity*buyingCommission;
-        if(buyStockWithCommission > initialMoney){
-//            System.out.println("Insufficient funds");
-        }
-        else {
 
-            if (usersInvestmentFile.get(clientId) == null) {
-                Map<String, String> symbols = new HashMap<>();
-                symbols.put(Symbol,Double.toString(stockPrice*quantity));
-                usersInvestmentFile.put(clientId, symbols);
-            } else {
-//                System.out.println("Add to existing stock");
-                Map<String, String> symbols = usersInvestmentFile.get(clientId);
-                if(symbols.get(Symbol) == null ) {
-                    symbols.put(Symbol, Double.toString(buyStockWithCommission));
-                }
-                else {
-                    Double currentPrice = Double.parseDouble(symbols.get(Symbol));
-                    currentPrice += buyStockWithCommission;
-                    symbols.put(Symbol, Double.toString(currentPrice));
-                }
+        Double withdraw = stockPrice*quantity;
 
-            }
+        if(usersInvestmentFile.get(clientId).depositMoney < withdraw ){
+            return;
         }
-        initialMoney -= buyStockWithCommission;
+
+            usersInvestmentFile.get(clientId).symbolToBuyValue.put(Symbol,stockPrice);
+            usersInvestmentFile.get(clientId).symbolToAmount.put(Symbol,Double.valueOf(quantity));
+
+            usersInvestmentFile.get(clientId).depositMoney -= withdraw;
+
     }
 
     /**
@@ -205,8 +192,9 @@ public class Broker implements Serializable {
      * @param clientEmail
      */
     public void acceptClient(String clientId, String clientEmail){
+        Double depositAmount  = userRequests.get(clientId);
         userRequests.remove(clientId);
-        usersInvestmentFile.put(clientId, new HashMap<>());
+        usersInvestmentFile.put(clientId, new ClientPortofolio(new HashMap<>(),new HashMap<>(),depositAmount));
         IdsToNames.put(clientId, clientEmail);
     }
 
@@ -277,7 +265,7 @@ public class Broker implements Serializable {
             this.notifications = notifications;
         }
 
-        public void setUsersInvestmentFile(Map<String, Map<String, String>> usersInvestmentFile) {
-            this.usersInvestmentFile = usersInvestmentFile;
-        }
+//        public void setUsersInvestmentFile(Map<String, Map<String, String>> usersInvestmentFile) {
+//            this.usersInvestmentFile = usersInvestmentFile;
+//        }
 }
