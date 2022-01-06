@@ -3,8 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/activity_after_login.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/broker_item_list_view.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/client_widget.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/fragment_broker.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/fragment_broker_list.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/fragment_client.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/fragment_favo.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/fragment_portofolio.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/fragment_profile.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/fragment_stock_full_page.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/fragment_user_requests.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/my_row.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/notification_view.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/portofolio.xml" value="0.536" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/portofolio_container.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/portofolio_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/portofolio_view.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/profile_details.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/search_item_stock_recommend.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/stock_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Samuel/StudioProjects/GetStock/app/src/main/res/layout/user_request_item_view.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/danda/Documents/Final_project/GetStock/app/src/main/res/drawable/ic_message.xml" value="0.1125" />
         <entry key="..\:/Users/danda/Documents/Final_project/GetStock/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/danda/Documents/Final_project/GetStock/app/src/main/res/layout/activity_profile.xml" value="0.25" />

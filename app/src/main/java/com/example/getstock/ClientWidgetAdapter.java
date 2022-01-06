@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -41,52 +42,73 @@ import java.util.List;
  */
 public class ClientWidgetAdapter extends RecyclerView.Adapter<ClientWidgetAdapter.ClientWidgetViewHolder> {
 
-    private List<String> stockList;
-    private List<String> stockListFull;
+    private List<String> clientList;
+    private List<String> clientListFull;
     Context ct;
     Fragment ft;
+    Broker broker;
 
+    public  recycleClickListener recycleClickListener;
     //Get our DB instance.
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    ClientWidgetAdapter(List<String> stockList, Context ct, Fragment ft) {
-        this.stockList = stockList;
-        stockListFull = new ArrayList<>(stockList);
+
+    ClientWidgetAdapter(List<String> clientList, Context ct, Fragment ft, recycleClickListener recycleClickListener) {
+        this.clientList = clientList;
+        clientListFull = new ArrayList<>(clientList);
         this.ct = ct;
         this.ft = ft;
+        this.recycleClickListener=recycleClickListener;
     }
 
 
-    class ClientWidgetViewHolder extends RecyclerView.ViewHolder {
+    class ClientWidgetViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView postDescription;
         TextView PostTitle;
         ImageView profilePicture;
         CardView cardView;
         PieChart pieChart;
 
-        ClientWidgetViewHolder(View itemView) {
+        recycleClickListener recycleClickListener;
+
+        ClientWidgetViewHolder(View itemView, recycleClickListener recycleClickListener) {
             super(itemView);
             postDescription = itemView.findViewById(R.id.postDescription);
             PostTitle = itemView.findViewById(R.id.title_of_post);
             profilePicture = itemView.findViewById(R.id.profile_picture);
             cardView = itemView.findViewById(R.id.click_post);
             pieChart = itemView.findViewById(R.id.piechart);
+            this.recycleClickListener= recycleClickListener;
 
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            recycleClickListener.myClickListener(getAdapterPosition());
         }
     }
+
 
     @NonNull
     @Override
     public ClientWidgetAdapter.ClientWidgetViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_item_stock_recommend,
                 parent, false);
-        return new ClientWidgetAdapter.ClientWidgetViewHolder(v);
+        ClientWidgetAdapter.ClientWidgetViewHolder myHolder =
+                new ClientWidgetAdapter.ClientWidgetViewHolder(v,recycleClickListener);
+
+//        v.setOnClickListener(myHolder);
+
+        return myHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ClientWidgetAdapter.ClientWidgetViewHolder holder, int position) {
-        String userId = stockList.get(position);
+
+        String userId = clientList.get(position);
         Log.d("", userId + " user");
+
         db.collection("Users").document(userId)
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -102,6 +124,7 @@ public class ClientWidgetAdapter extends RecyclerView.Adapter<ClientWidgetAdapte
                 Log.d("", "failed");
             }
         });
+
         //Create pie chart
         holder.pieChart.addPieSlice(
                 new PieModel(
@@ -128,8 +151,15 @@ public class ClientWidgetAdapter extends RecyclerView.Adapter<ClientWidgetAdapte
 
 
 //        holder.cardView.setOnClickListener(new View.OnClickListener() {
+//
 //            @Override
 //            public void onClick(View view) {
+//
+//                getBroker();
+//                Bundle args= new Bundle();
+//                args.putSerializable("broker", broker);
+//                args.putString("clientId", userId);
+//
 //
 //            }
 //        });
@@ -137,8 +167,32 @@ public class ClientWidgetAdapter extends RecyclerView.Adapter<ClientWidgetAdapte
 
     @Override
     public int getItemCount() {
-        return stockList.size();
+        return clientList.size();
+    }
+
+    public void getBroker(){
+
+
+        db.collection("Brokers")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                 broker = (Broker)documentSnapshot.toObject(Broker.class);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+
+    }
+
+
+
+    public  interface recycleClickListener{
+        void myClickListener(int position);
     }
 }
-
 

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="400dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="8dp"
+    android:elevation="10dp"
+    android:layout_marginRight="10dp"
+    app:cardBackgroundColor="@color/nice_blue"
+    android:id="@+id/click_post">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="4dp">
+
+
+        <ImageView
+            android:id="@+id/company_picture"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="2dp"
+            android:src="@drawable/apple_icon" />
+
+        <TextView
+            android:id="@+id/title_of_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/company_picture"
+            android:text="AAPL"
+            android:textColor="@color/nice_yellow"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/postDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_of_post"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/company_picture"
+            android:text="Apple industries inc."
+            android:textColor="@color/nice_yellow"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/amountText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="70dp"
+            android:text="Purchased"
+            android:textColor="@color/nice_yellow"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/amount"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="190dp"
+            android:layout_marginTop="70dp"
+            android:layout_toEndOf="@+id/amountText"
+            android:text="2"
+            android:textColor="@color/nice_yellow"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/buyValueText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="140dp"
+            android:text="Purchase Price"
+            android:textColor="@color/nice_yellow"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/buyValue"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="140dp"
+            android:layout_toEndOf="@+id/buyValueText"
+            android:text="2"
+            android:textColor="@color/nice_yellow"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/presentValueText"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="210dp"
+            android:text="Current price
+"
+            android:textColor="@color/nice_yellow"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/presentValue"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="210dp"
+            android:layout_toEndOf="@+id/presentValueText"
+            android:text="2"
+            android:textColor="@color/nice_yellow"
+            android:textSize="30dp" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

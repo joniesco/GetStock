@@ -151,6 +151,7 @@ public class BrokerListAdapter extends RecyclerView.Adapter<BrokerListAdapter.Br
             }
 
         });
+
         //Define what happens when you click the send button.
         holder.sendDetails.setOnClickListener(new View.OnClickListener() {
             /**

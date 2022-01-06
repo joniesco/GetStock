@@ -1,11 +1,15 @@
 package com.example.getstock;
 
+import static com.example.getstock.R.id.ClientRecycler;
+
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,7 +37,7 @@ import yahoofinance.Stock;
  * (A yellowish widget on the home screen) , contains small amounts of data
  * each widget can be clicked to move to the full client details.
  */
-public class ClientsFragment extends Fragment {
+public class ClientsFragment extends Fragment implements ClientWidgetAdapter.recycleClickListener {
 
     private RecyclerView recommendRecyclerView; //Will hold our widgets.
     private List<String> postList; //a random list that currently populates the page.
@@ -57,6 +61,8 @@ public class ClientsFragment extends Fragment {
     ClientWidgetAdapter stockRecommendorAdapter;
 
     Context ct = getContext();
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,19 +72,25 @@ public class ClientsFragment extends Fragment {
 
 
         // Fill an fake list of items to be presented.
-        fillExampleList();
+//        fillExampleList();
 
         // Inflate the layout for this fragment
-        recommendRecyclerView = view.findViewById(R.id.ClientRecycler);
+        recommendRecyclerView = view.findViewById(ClientRecycler);
         recommendRecyclerView.setHasFixedSize(true);
+
         LinearLayoutManager llm = new LinearLayoutManager(view.getContext());
         llm.setOrientation(RecyclerView.HORIZONTAL);
         recommendRecyclerView.setLayoutManager(llm);
-        stockRecommendorAdapter = new ClientWidgetAdapter(postList,view.getContext(),this);
-        recommendRecyclerView.setAdapter(stockRecommendorAdapter);
+
+
+
+
         args = new Bundle();
+
+
         //Set user settings
         userType = getArguments().getInt("userType");
+
         if(userType == 1) { //broker
 
             broker = (Broker) getArguments().getSerializable("broker");
@@ -88,7 +100,13 @@ public class ClientsFragment extends Fragment {
             args.putSerializable("broker", broker);
 
             //update client list
-            updateBroker();
+
+            postList = new ArrayList<>(broker.IdsToNames.keySet());
+//            stockRecommendorAdapter.notifyDataSetChanged();
+            stockRecommendorAdapter = new ClientWidgetAdapter(postList,view.getContext(),this, this);
+            recommendRecyclerView.setAdapter(stockRecommendorAdapter);
+
+//            updateBroker();
         }
         else { //user
 
@@ -98,8 +116,11 @@ public class ClientsFragment extends Fragment {
             args.putInt("userType", 2);
             args.putSerializable("user", user);
 
-
+//            stockRecommendorAdapter = new ClientWidgetAdapter(postList,view.getContext(),this, this);
+//            recommendRecyclerView.setAdapter(stockRecommendorAdapter);
         }
+
+
 
         return view;
     }
@@ -124,6 +145,7 @@ public class ClientsFragment extends Fragment {
 //        postList.add(new Broker("test", "Nine", "Eighteen", 0.5));
 
     }
+
     public void updateBroker(){
         db.collection("Brokers")
                 .document(mAuth.getCurrentUser().getUid())
@@ -135,8 +157,11 @@ public class ClientsFragment extends Fragment {
                 Log.d("", ""+postList.size() + "this");
                 stockRecommendorAdapter.notifyDataSetChanged();
 
-                //StockRecommendorAdapter is list of Clients
-                stockRecommendorAdapter = new ClientWidgetAdapter(postList,getContext(),getTargetFragment());
+//                //StockRecommendorAdapter is list of Clients
+//                stockRecommendorAdapter = new ClientWidgetAdapter(postList,
+//                        getContext(),
+//                        getTargetFragment(),
+//                        );
                 recommendRecyclerView.setAdapter(stockRecommendorAdapter);
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -169,5 +194,22 @@ public class ClientsFragment extends Fragment {
         clientList = new ArrayList<>();
 //        brokerDatabase = FirebaseDatabase.getInstance().getReference().child("Brokers");
         //need to insert all brokers into list and pass the list in the adapter.
+    }
+
+
+    @Override
+    public void myClickListener(int position) {
+
+        Log.d("", ""+postList.size() + "this");
+
+        String userId = postList.get(position);
+
+
+        args.putSerializable("portofolio", broker.usersInvestmentFile.get(userId));
+
+        Intent intent = new Intent(getContext(),PortofolioActivity.class) ;
+        intent.putExtras(args);
+
+        startActivity(intent);
     }
 }

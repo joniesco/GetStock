@@ -145,6 +145,7 @@ public class ProfileFragment extends Fragment {
                 numOfClients.setText(broker.getUsersInvesting().keySet().size());
             }
             balance.setText(broker.getInitialMoney().toString());
+
             //Notifications
             notifications.setText(Integer.toString(broker.getUserRequests().size()));
             notificationButton.setOnClickListener(new View.OnClickListener() {
