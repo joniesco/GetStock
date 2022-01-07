@@ -102,7 +102,7 @@ public class ClientsFragment extends Fragment implements ClientWidgetAdapter.rec
 
             postList = new ArrayList<>(broker.IdsToNames.keySet());
 //            stockRecommendorAdapter.notifyDataSetChanged();
-            stockRecommendorAdapter = new ClientWidgetAdapter(postList,view.getContext(),this, this);
+            stockRecommendorAdapter = new ClientWidgetAdapter(postList,view.getContext(),this, this, 1);
             recommendRecyclerView.setAdapter(stockRecommendorAdapter);
 
 //            updateBroker();
@@ -115,8 +115,11 @@ public class ClientsFragment extends Fragment implements ClientWidgetAdapter.rec
             args.putInt("userType", 2);
             args.putSerializable("user", user);
 
-//            stockRecommendorAdapter = new ClientWidgetAdapter(postList,view.getContext(),this, this);
-//            recommendRecyclerView.setAdapter(stockRecommendorAdapter);
+            postList = new ArrayList<>(user.brokerMap.keySet());
+//            stockRecommendorAdapter.notifyDataSetChanged();
+            stockRecommendorAdapter = new ClientWidgetAdapter(postList,view.getContext(),this, this, 2);
+            recommendRecyclerView.setAdapter(stockRecommendorAdapter);
+
         }
 
 
@@ -202,13 +205,41 @@ public class ClientsFragment extends Fragment implements ClientWidgetAdapter.rec
         Log.d("", ""+postList.size() + "this");
 
         String userId = postList.get(position);
+        Log.d("", "user Id" + userId);
+
+        if(userType ==1 ) {
+            args.putSerializable("portofolio", broker.usersInvestmentFile.get(userId));
+
+            Intent intent = new Intent(getContext(),PortofolioActivity.class) ;
+            intent.putExtras(args);
+
+            startActivity(intent);
+        }
+        else {
+            Log.d("", "user Id" + userId);
+            db.collection("Brokers").document(userId)
+                    .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                    Broker broker = (Broker) documentSnapshot.toObject(Broker.class);
+                    args.putSerializable("portofolio", broker.usersInvestmentFile
+                            .get(mAuth.getCurrentUser().getUid()));
+
+                    Intent intent = new Intent(getContext(),PortofolioActivity.class) ;
+                    intent.putExtras(args);
+
+                    startActivity(intent);
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                }
+            });
+        }
 
 
-        args.putSerializable("portofolio", broker.usersInvestmentFile.get(userId));
-
-        Intent intent = new Intent(getContext(),PortofolioActivity.class) ;
-        intent.putExtras(args);
-
-        startActivity(intent);
     }
 }

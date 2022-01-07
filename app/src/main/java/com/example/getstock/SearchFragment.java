@@ -36,13 +36,15 @@ import org.w3c.dom.Text;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import eu.verdelhan.ta4j.Rule;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment implements Observer {
 
     //Our views
     public ImageButton pressSearch;
@@ -61,6 +63,7 @@ public class SearchFragment extends Fragment {
 
         //Create our model.
         searchModel = new SearchModel(getArguments());
+        searchModel.addObserver(this);
 
         //get Context.
         ct = getContext();
@@ -151,6 +154,10 @@ public class SearchFragment extends Fragment {
         ((AppCompatActivity) getActivity()).setTitle("Search stock symbol");
     }
 
+    @Override
+    public void update(Observable observable, Object o) {
+
     }
+}
 
 

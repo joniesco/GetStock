@@ -47,18 +47,20 @@ public class ClientWidgetAdapter extends RecyclerView.Adapter<ClientWidgetAdapte
     Context ct;
     Fragment ft;
     Broker broker;
+    int userType;
 
     public  recycleClickListener recycleClickListener;
     //Get our DB instance.
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
-    ClientWidgetAdapter(List<String> clientList, Context ct, Fragment ft, recycleClickListener recycleClickListener) {
+    ClientWidgetAdapter(List<String> clientList, Context ct, Fragment ft, recycleClickListener recycleClickListener, int userType) {
         this.clientList = clientList;
         clientListFull = new ArrayList<>(clientList);
         this.ct = ct;
         this.ft = ft;
         this.recycleClickListener=recycleClickListener;
+        this.userType = userType;
     }
 
 
@@ -108,23 +110,42 @@ public class ClientWidgetAdapter extends RecyclerView.Adapter<ClientWidgetAdapte
 
         String userId = clientList.get(position);
         Log.d("", userId + " user");
+        if(userType == 1) {
+            db.collection("Users").document(userId)
+                    .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    User user = (User) documentSnapshot.toObject(User.class);
+                    Log.d("", "user" + user.toString());
+                    holder.PostTitle.setText(user.getFullName());
+                    holder.postDescription.setText(user.getEmail());
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("", "failed");
+                }
+            });
+        }
+        else {
+            db.collection("Brokers").document(userId)
+                    .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    Broker broker = (Broker) documentSnapshot.toObject(Broker.class);
 
-        db.collection("Users").document(userId)
-                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                User user = (User) documentSnapshot.toObject(User.class);
-                Log.d("", "user" + user.toString());
-                holder.PostTitle.setText(user.getFullName());
-                holder.postDescription.setText(user.getEmail());
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("", "failed");
-            }
-        });
+//                    Log.d("", "user" + user.toString());
 
+                    holder.PostTitle.setText(broker.getFullName());
+                    holder.postDescription.setText(broker.getEmail());
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("", "failed");
+                }
+            });
+        }
         //Create pie chart
         holder.pieChart.addPieSlice(
                 new PieModel(
@@ -178,7 +199,9 @@ public class ClientWidgetAdapter extends RecyclerView.Adapter<ClientWidgetAdapte
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
+
                  broker = (Broker)documentSnapshot.toObject(Broker.class);
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
