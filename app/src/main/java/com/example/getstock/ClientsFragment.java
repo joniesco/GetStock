@@ -60,7 +60,6 @@ public class ClientsFragment extends Fragment implements ClientWidgetAdapter.rec
     Broker broker;
     ClientWidgetAdapter stockRecommendorAdapter;
 
-    Context ct = getContext();
 
 
     @Override
