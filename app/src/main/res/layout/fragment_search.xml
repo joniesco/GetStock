@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SearchFragment"
-    android:background="#191919">
+    android:background="#191919"
+    >
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/search"
-        android:textColor="#7CD1B8"
-        android:id="@+id/yahoo_stock"
-        android:layout_margin="10dp"/>
+    <include layout="@layout/search_toolbar" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,7 +32,6 @@
         tools:context=".BrokerListFragment"
         android:background="#191919"
         android:layout_marginBottom="20dp"
-        android:layout_below="@id/yahoo_stock"
         android:layout_margin="20dp"
         android:id="@+id/broker_list_fragment_container">
 

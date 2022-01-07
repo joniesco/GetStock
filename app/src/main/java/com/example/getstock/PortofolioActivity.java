@@ -56,7 +56,7 @@ public class PortofolioActivity extends AppCompatActivity {
         stocksRecycleView.setHasFixedSize(true);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(RecyclerView.HORIZONTAL);
+        llm.setOrientation(RecyclerView.VERTICAL);
         stocksRecycleView.setLayoutManager(llm);
 
         ClientPortofolio portofolio = (ClientPortofolio) bundle.getSerializable("portofolio");

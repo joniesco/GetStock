@@ -123,7 +123,10 @@ public class StockFullPageFragment extends Fragment {
             @Override
             protected Void doInBackground(Void... voids) {
                 try {
-                    Stock myStock = YahooFinance.get("INTC");
+                    String stockSymbol = getArguments().getString("symbol").toUpperCase();
+                    Log.d("", stockSymbol);
+                    Stock myStock = YahooFinance.get(stockSymbol);
+
                     stockDetails[0] = myStock.getSymbol(); //
                     stockDetails[1] = myStock.getStockExchange(); //Exchange
                     stockDetails[2] = myStock.getName(); //Company name

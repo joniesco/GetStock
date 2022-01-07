@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="2dp"
+    app:cardCornerRadius="8dp"
+    android:elevation="10dp"
+    android:id="@+id/my_avatar"
+    app:cardBackgroundColor="@color/grey_900"
+    android:layout_gravity="center"
+    android:layout_marginTop="10dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="type ticker symbol"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/bebas_regular"
+        android:textColor="@color/nice_yellow"
+        android:id="@+id/free_text"
+        android:layout_margin="20dp"
+        android:layout_centerHorizontal="true"/>
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/free_text"
+        app:cardBackgroundColor="@color/grey_900">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter Text"
+        android:layout_gravity="center"
+        android:textColor="@color/nice_yellow"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/bebas_regular"
+        android:id="@+id/input_search"
+
+        />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_search"
+        android:id="@+id/press_search"
+        android:layout_toEndOf="@id/input_search"
+        android:tint="@color/grey_900"
+        />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
